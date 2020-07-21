@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-import Dashboard from 'screens/Dashboard';
 import MintrPanel from 'screens/MintrPanel';
 
 const Main: FC = () => (

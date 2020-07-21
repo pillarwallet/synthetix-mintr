@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { setCurrentTab, getCurrentTab } from '../../ducks/ui';
 import { getModalState } from '../../ducks/modal';
 
-import { Home, Depot, Transactions, Escrow, LPRewards } from '../MintrTabs';
+import { Depot, Transactions, Escrow, LPRewards } from '../MintrTabs';
 import { TabButton } from '../../components/Button';
 import { GweiModal, DelegateModal } from '../../components/Modal';
 import { MODAL_TYPES_TO_KEY } from '../../constants/modal';
