@@ -1,5 +1,6 @@
+/* address here refers to the Uniswap PL token */
 export default {
-	address: '0x34a0216C5057bC18e5d34D4405284564eFd759b2',
+	address: '0xaE2D4004241254aEd3f93873604d39883c8259F0',
 	abi: [
 		{ inputs: [], payable: false, stateMutability: 'nonpayable', type: 'constructor' },
 		{

@@ -19,15 +19,15 @@ const SetAllowance = ({ createTransaction, goBack, currentGasPrice }) => {
 
 	const onUnlock = async () => {
 		const { parseEther } = snxJSConnector.utils;
-		const { uniswapV1Contract, unipoolSETHContract } = snxJSConnector;
+		const { uniswapV2Contract, unipoolSETHContract } = snxJSConnector;
 		try {
 			setError(null);
 
-			const gasEstimate = await uniswapV1Contract.estimate.approve(
+			const gasEstimate = await uniswapV2Contract.estimate.approve(
 				unipoolSETHContract.address,
 				parseEther(TOKEN_ALLOWANCE_LIMIT.toString())
 			);
-			const transaction = await uniswapV1Contract.approve(
+			const transaction = await uniswapV2Contract.approve(
 				unipoolSETHContract.address,
 				parseEther(TOKEN_ALLOWANCE_LIMIT.toString()),
 				{

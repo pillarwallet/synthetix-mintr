@@ -45,9 +45,9 @@ const Stake = ({ walletDetails, goBack }) => {
 	const fetchData = useCallback(async () => {
 		if (!snxJSConnector.initialized) return;
 		try {
-			const { uniswapV1Contract, unipoolSETHContract } = snxJSConnector;
+			const { uniswapV2Contract, unipoolSETHContract } = snxJSConnector;
 			const [univ1Held, univ1Staked, rewards] = await Promise.all([
-				uniswapV1Contract.balanceOf(currentWallet),
+				uniswapV2Contract.balanceOf(currentWallet),
 				unipoolSETHContract.balanceOf(currentWallet),
 				unipoolSETHContract.earned(currentWallet),
 			]);
