@@ -29,40 +29,9 @@ const POOLS_MAJOR = [
 		image: '/images/pools/unipool-sETH.svg',
 		contract: 'unipoolSETHContract',
 	},
-	{
-		title: 'lpRewards.actions.unipoolSXAU.title',
-		name: 'unipoolSXAU',
-		image: '/images/pools/unipool-sXAU.svg',
-		contract: 'unipoolSXAUContract',
-	},
-	{
-		title: 'lpRewards.actions.curvepoolSBTC.title',
-		name: 'curvepoolSBTC',
-		image: '/images/pools/iearn-sBTC.svg',
-		contract: 'sBTCRewardsContract',
-	},
 ];
 
-const POOLS_SECONDARY = [
-	{
-		title: 'lpRewards.actions.curvepool.title',
-		name: 'iearn',
-		image: '/images/pools/iearn.svg',
-		contract: 'curvepoolContract',
-	},
-	{
-		title: 'lpRewards.actions.ieth.title',
-		name: 'ieth',
-		image: '/images/currencies/iETH.svg',
-		contract: 'iEthRewardsContract',
-	},
-	{
-		title: 'lpRewards.actions.balancer.title',
-		name: 'balancerSNX',
-		image: '/images/pools/balancer-SNX.svg',
-		contract: 'balancerSNXRewardsContract',
-	},
-];
+const POOLS_SECONDARY = [];
 
 const LPRewards = ({ currentTheme }) => {
 	const { t } = useTranslation();

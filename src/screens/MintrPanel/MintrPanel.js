@@ -15,7 +15,7 @@ const renderScreen = screen => {
 	switch (screen) {
 		case 'home':
 		default:
-			return <Home />;
+			return <LPRewards />;
 		case 'depot':
 			return <Depot />;
 		case 'transactionsHistory':
@@ -33,7 +33,7 @@ const MainContainer = ({ currentTab, modalState: { modalType, modalProps }, setC
 		<MainContainerWrapper>
 			<Overlay isVisible={modalType}></Overlay>
 			<Header>
-				{['home', 'depot', 'transactionsHistory', 'escrow', 'lpRewards'].map(tab => {
+				{['lpRewards'].map(tab => {
 					return (
 						<TabButton
 							key={tab}

@@ -6,7 +6,6 @@ import MintrPanel from 'screens/MintrPanel';
 
 const Main: FC = () => (
 	<MainWrapper>
-		<Dashboard />
 		<MintrPanel />
 	</MainWrapper>
 );
