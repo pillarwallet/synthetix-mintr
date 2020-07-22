@@ -164,21 +164,14 @@ const Landing = ({ currentTheme, walletDetails, updateWalletStatus, setCurrentPa
 					})}
 				</Wallets>
 				<BottomLinks>
-					<Link href="https://help.synthetix.io/hc/en-us" target="_blank">
+					<Link href="https://help.pillarproject.io/en/" target="_blank">
 						<ButtonTertiaryLabel>{t('button.havingTrouble')}</ButtonTertiaryLabel>
 					</Link>
-					<Link
-						href={`https://www.synthetix.io/uploads/synthetix_litepaper${
-							i18n.language === 'zh-CN' ? '_mandarin' : ''
-						}.pdf`}
-						target="_blank"
-					>
+					<Link href={`https://pillarproject.io/`} target="_blank">
 						<ButtonTertiaryLabel>{t('button.whatIsSynthetix')}</ButtonTertiaryLabel>
 					</Link>
-					<ExternalLink
-						href={`https://github.com/Synthetixio/synthetix-mintr/releases/tag/v${process.env.REACT_APP_VERSION}`}
-					>
-						<VersionLabel>v{process.env.REACT_APP_VERSION}</VersionLabel>
+					<ExternalLink href={`https://github.com/Synthetixio/synthetix-mintr/`}>
+						<VersionLabel>v{process.env.REACT_APP_VERSION} - Forked from Mintr</VersionLabel>
 					</ExternalLink>
 				</BottomLinks>
 			</WalletConnectContainer>
