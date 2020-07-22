@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { setCurrentTab, getCurrentTab } from '../../ducks/ui';
 import { getModalState } from '../../ducks/modal';
 
-import { Depot, Transactions, Escrow, LPRewards } from '../MintrTabs';
+import { LPRewards } from '../MintrTabs';
 import { TabButton } from '../../components/Button';
 import { GweiModal, DelegateModal } from '../../components/Modal';
 import { MODAL_TYPES_TO_KEY } from '../../constants/modal';
@@ -16,12 +16,6 @@ const renderScreen = screen => {
 		case 'home':
 		default:
 			return <LPRewards />;
-		case 'depot':
-			return <Depot />;
-		case 'transactionsHistory':
-			return <Transactions />;
-		case 'escrow':
-			return <Escrow />;
 		case 'lpRewards':
 			return <LPRewards />;
 	}

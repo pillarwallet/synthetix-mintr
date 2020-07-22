@@ -4,11 +4,6 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import UnipoolSETH from './UniPoolSETH';
-import UniPoolSXAU from './UnipoolSXAU';
-import CurvePoolSUSD from './CurvePoolSUSD';
-import CurvePoolSBTC from './CurvePoolSBTC';
-import IEth from './IEth';
-import BalancerSNX from './BalancerSNX';
 
 import { getCurrentTheme } from 'ducks/ui';
 
@@ -40,23 +35,11 @@ const LPRewards = ({ currentTheme }) => {
 	const goBack = () => setCurrentPool(null);
 
 	useEffect(() => {
-		const {
-			unipoolSXAUContract,
-			unipoolSETHContract,
-			curvepoolContract,
-			iEthRewardsContract,
-			balancerSNXRewardsContract,
-		} = snxJSConnector;
+		const { unipoolSETHContract } = snxJSConnector;
 
 		const getRewardsAmount = async () => {
 			try {
-				const contracts = [
-					unipoolSXAUContract,
-					unipoolSETHContract,
-					curvepoolContract,
-					iEthRewardsContract,
-					balancerSNXRewardsContract,
-				];
+				const contracts = [unipoolSETHContract];
 				const rewardsData = await Promise.all(
 					contracts.map(contract => Promise.all([contract.DURATION(), contract.rewardRate()]))
 				);
@@ -78,16 +61,6 @@ const LPRewards = ({ currentTheme }) => {
 		switch (poolName) {
 			case 'unipoolSETH':
 				return <UnipoolSETH goBack={goBack} />;
-			case 'unipoolSXAU':
-				return <UniPoolSXAU goBack={goBack} />;
-			case 'iearn':
-				return <CurvePoolSUSD goBack={goBack} />;
-			case 'curvepoolSBTC':
-				return <CurvePoolSBTC goBack={goBack} />;
-			case 'ieth':
-				return <IEth goBack={goBack} />;
-			case 'balancerSNX':
-				return <BalancerSNX goBack={goBack} />;
 			default:
 				return null;
 		}
@@ -119,7 +92,7 @@ const LPRewards = ({ currentTheme }) => {
 														<StyledDataLarge>25,000 REN</StyledDataLarge>
 													</DistributionRow>
 												) : !['unipoolSETH', 'unipoolSXAU', 'balancerSNX'].includes(name) ? (
-													<StyledDataLarge>{formatCurrency(distribution, 0)} SNX</StyledDataLarge>
+													<StyledDataLarge>{formatCurrency(distribution, 0)} PLR</StyledDataLarge>
 												) : (
 													<CompletedLabel>
 														<CompletedLabelHeading>

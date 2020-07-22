@@ -6,21 +6,7 @@ import {
 	PORTIS_APP_ID,
 } from './networkHelper';
 import { ethers } from 'ethers';
-import {
-	uniswapV1,
-	uniswapV2,
-	unipoolSETH,
-	unipoolSXAU,
-	curvepool,
-	curveLPToken,
-	synthSummary,
-	oldCurvepool,
-	iEthRewards,
-	balancerpool,
-	balancerSNXRewards,
-	curveSBTC,
-	sBTCRewards,
-} from './contracts';
+import { uniswapV1, uniswapV2, unipoolSETH, synthSummary } from './contracts';
 
 let snxJSConnector = {
 	initialized: false,
@@ -33,49 +19,13 @@ let snxJSConnector = {
 		this.provider = this.snxJS.contractSettings.provider;
 		this.utils = this.snxJS.utils;
 		this.ethersUtils = this.snxJS.ethers.utils;
+
 		if (this.signer) {
 			this.uniswapV1Contract = new ethers.Contract(uniswapV1.address, uniswapV1.abi, this.signer);
 			this.uniswapV2Contract = new ethers.Contract(uniswapV2.address, uniswapV2.abi, this.signer);
 			this.unipoolSETHContract = new ethers.Contract(
 				unipoolSETH.address,
 				unipoolSETH.abi,
-				this.signer
-			);
-			this.unipoolSXAUContract = new ethers.Contract(
-				unipoolSXAU.address,
-				unipoolSXAU.abi,
-				this.signer
-			);
-			this.curveLPTokenContract = new ethers.Contract(
-				curveLPToken.address,
-				curveLPToken.abi,
-				this.signer
-			);
-			this.curvepoolContract = new ethers.Contract(curvepool.address, curvepool.abi, this.signer);
-			this.oldCurvepoolContract = new ethers.Contract(
-				oldCurvepool.address,
-				curvepool.abi,
-				this.signer
-			);
-			this.iEthRewardsContract = new ethers.Contract(
-				iEthRewards.address,
-				iEthRewards.abi,
-				this.signer
-			);
-			this.balancerpoolContract = new ethers.Contract(
-				balancerpool.address,
-				balancerpool.abi,
-				this.signer
-			);
-			this.balancerSNXRewardsContract = new ethers.Contract(
-				balancerSNXRewards.address,
-				balancerSNXRewards.abi,
-				this.signer
-			);
-			this.curveSBTCContract = new ethers.Contract(curveSBTC.address, curveSBTC.abi, this.signer);
-			this.sBTCRewardsContract = new ethers.Contract(
-				sBTCRewards.address,
-				sBTCRewards.abi,
 				this.signer
 			);
 		}
