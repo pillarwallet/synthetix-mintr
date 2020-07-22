@@ -49,7 +49,7 @@ const MainContainer = ({ currentTab, modalState: { modalType, modalProps }, setC
 
 const MainContainerWrapper = styled('div')`
 	width: 100%;
-	background-color: ${props => props.theme.colorStyles.background};
+	background-color: ${props => props.theme.colorStyles.panels};
 	position: relative;
 `;
 
@@ -57,7 +57,7 @@ const Header = styled('div')`
 	display: flex;
 	justify-content: space-between;
 	height: 80px;
-	background-color: ${props => props.theme.colorStyles.menu};
+	background-color: ${props => props.theme.colorStyles.background};
 `;
 
 const Overlay = styled.div`

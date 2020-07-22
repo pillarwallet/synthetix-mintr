@@ -16,16 +16,11 @@ const Button = styled.button`
 	padding-top: 8px;
 	border: none;
 	flex: 1;
-	font-size: 14px;
-	text-transform: uppercase;
+	font-size: 32px;
 	letter-spacing: 1px;
 	transition: all ease-in 0.1s;
-	font-family: ${props => (props.isSelected ? 'apercu-bold' : 'apercu-medium')};
-	background-color: ${props =>
-		props.isSelected ? props.theme.colorStyles.borders : props.theme.colorStyles.menu};
-	border-bottom: 8px solid
-		${props =>
-			props.isSelected ? props.theme.colorStyles.accentDark : props.theme.colorStyles.menu};
+	font-family: 'archia-medium';
+	background-color: ${props => props.theme.colorStyles.background};
 	color: ${props => props.theme.colorStyles.subtext};
 	&:disabled {
 		opacity: 0.3;

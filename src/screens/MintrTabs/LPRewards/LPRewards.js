@@ -174,6 +174,7 @@ const ActionImage = styled.img`
 const StyledHeading = styled(H1)`
 	font-size: 22px;
 	text-transform: none;
+	color: ${props => props.theme.colorStyles.panels};
 `;
 
 const StyledDataLarge = styled(DataLarge)`
@@ -190,8 +191,9 @@ const DistributionRow = styled.div`
 `;
 
 const StyledSubtext = styled(Subtext)`
-	text-transform: uppercase;
+	text-transform: none;
 	margin: 28px 0 12px 0;
+	color: ${props => props.theme.colorStyles.panels};
 `;
 
 const TooltipIconContainer = styled.div`

@@ -7,7 +7,7 @@ import { getCurrentTheme } from '../../ducks/ui';
 const Logo = ({ className, themeIsDark }) => {
 	return (
 		<Link href="/" className={className}>
-			<LogoImg src={`/images/mintr-logo-${themeIsDark ? 'light' : 'dark'}.svg`} />
+			<LogoImg src={`/images/pillar-logo-vector-07.svg`} />
 		</Link>
 	);
 };

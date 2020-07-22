@@ -87,7 +87,7 @@
 			"depot": "Depot",
 			"transactionsHistory": "Transactions",
 			"escrow": "Escrow",
-			"lpRewards": "LP rewards"
+			"lpRewards": "Liquidity Pool Rewards"
 		}
 	},
 	"home": {

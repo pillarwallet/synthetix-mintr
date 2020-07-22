@@ -2,7 +2,7 @@ import themeDark from './dark';
 
 const fontFamilies = {
 	regular: 'EuclidCircularB-Regular',
-	medium: 'Archia-medium'
+	medium: 'Archia-medium',
 };
 
 export const isDarkTheme = theme => true;
