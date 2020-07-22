@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Carousel } from 'react-responsive-carousel';
 import { useTranslation } from 'react-i18next';
-import i18n from 'i18next';
 
 import snxJSConnector, { connectToWallet } from '../../helpers/snxJSConnector';
 
@@ -17,7 +15,6 @@ import {
 	onMetamaskAccountChange,
 	SUPPORTED_WALLETS_MAP,
 } from '../../helpers/networkHelper';
-import { ButtonPrimary, ButtonSecondary } from '../../components/Button';
 import { H1, H2, PMega, ButtonTertiaryLabel } from '../../components/Typography';
 import Logo from '../../components/Logo';
 
@@ -26,8 +23,6 @@ import { ExternalLink } from 'styles/common';
 
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './carousel.css';
-
-const SLIDE_COUNT = 4;
 
 const onWalletClick = ({ wallet, derivationPath, updateWalletStatus, setCurrentPage }) => {
 	return async () => {
@@ -52,65 +47,22 @@ const onWalletClick = ({ wallet, derivationPath, updateWalletStatus, setCurrentP
 	};
 };
 
-const OnBoardingCarousel = ({ pageIndex, setPageIndex, currentTheme }) => {
+const OnBoardingCarousel = ({ currentTheme }) => {
 	const { t } = useTranslation();
 	return (
-		<CarouselContainer>
-			<Carousel
-				selectedItem={pageIndex}
-				showArrows={false}
-				showThumbs={false}
-				showStatus={false}
-				interval={10000}
-				onChange={position => setPageIndex(position)}
-				autoplay
-			>
-				<CarouselSlide>
-					<OnboardingH1>{t('onboarding.slides.welcome.title')}</OnboardingH1>
-					<OnboardingPMega>{t('onboarding.slides.welcome.description')}</OnboardingPMega>
-					<OnboardingIllustration
-						style={{ marginTop: '20px' }}
-						src={`/images/onboarding/welcome-${currentTheme ? 'dark' : 'light'}.png`}
-					/>
-				</CarouselSlide>
-				<CarouselSlide>
-					<OnboardingH1>{t('onboarding.slides.whatIsSynthetix.title')}</OnboardingH1>
-					<OnboardingPMega>{t('onboarding.slides.whatIsSynthetix.description')}</OnboardingPMega>
-					<OnboardingIllustration
-						src={`/images/onboarding/what-is-synthetix-${currentTheme ? 'dark' : 'light'}.png`}
-					/>
-				</CarouselSlide>
-
-				<CarouselSlide>
-					<OnboardingH1>{t('onboarding.slides.whyStakeSnx.title')}</OnboardingH1>
-					<OnboardingPMega>{t('onboarding.slides.whyStakeSnx.description')}</OnboardingPMega>
-					<OnboardingIllustration
-						src={`/images/onboarding/why-stake-${currentTheme ? 'dark' : 'light'}.png`}
-					/>
-				</CarouselSlide>
-
-				<CarouselSlide>
-					<OnboardingH1>{t('onboarding.slides.howStakeSnx.title')}</OnboardingH1>
-					<OnboardingPMega>{t('onboarding.slides.howStakeSnx.description')}</OnboardingPMega>
-					<OnboardingIllustration
-						src={`/images/onboarding/what-to-do-${currentTheme ? 'dark' : 'light'}.png`}
-					/>
-				</CarouselSlide>
-				<CarouselSlide>
-					<OnboardingH1>{t('onboarding.slides.risks.title')}</OnboardingH1>
-					<OnboardingPMega>{t('onboarding.slides.risks.description')}</OnboardingPMega>
-					<OnboardingIllustration
-						src={`/images/onboarding/risks-${currentTheme ? 'dark' : 'light'}.png`}
-					/>
-				</CarouselSlide>
-			</Carousel>
-		</CarouselContainer>
+		<>
+			<OnboardingH1>{t('onboarding.slides.welcome.title')}</OnboardingH1>
+			<OnboardingPMega>{t('onboarding.slides.welcome.description')}</OnboardingPMega>
+			<OnboardingIllustration
+				style={{ marginTop: '20px' }}
+				src={`/images/onboarding/welcome-${currentTheme ? 'dark' : 'light'}.png`}
+			/>
+		</>
 	);
 };
 
 const Landing = ({ currentTheme, walletDetails, updateWalletStatus, setCurrentPage }) => {
 	const { t } = useTranslation();
-	const [pageIndex, setPageIndex] = useState(0);
 
 	const { derivationPath } = walletDetails;
 	return (
@@ -119,27 +71,7 @@ const Landing = ({ currentTheme, walletDetails, updateWalletStatus, setCurrentPa
 				<Header>
 					<Logo />
 				</Header>
-				<OnBoardingCarousel
-					pageIndex={pageIndex}
-					setPageIndex={setPageIndex}
-					currentTheme={currentTheme}
-				/>
-				<ButtonRow>
-					<ButtonSecondary
-						onClick={() => setPageIndex(Math.max(pageIndex - 1, 0))}
-						height="56px"
-						width="280px"
-					>
-						{t('button.previous')}
-					</ButtonSecondary>
-					<ButtonPrimary
-						onClick={() => setPageIndex(pageIndex === SLIDE_COUNT ? 0 : pageIndex + 1)}
-						height="56px"
-						width="280px"
-					>
-						{pageIndex === SLIDE_COUNT ? t('button.startOver') : t('button.next')}
-					</ButtonPrimary>
-				</ButtonRow>
+				<OnBoardingCarousel currentTheme={currentTheme} />
 			</OnboardingContainer>
 			<WalletConnectContainer>
 				<Wallets>
@@ -165,10 +97,12 @@ const Landing = ({ currentTheme, walletDetails, updateWalletStatus, setCurrentPa
 				</Wallets>
 				<BottomLinks>
 					<Link href="https://help.pillarproject.io/en/" target="_blank">
-						<ButtonTertiaryLabel>{t('button.havingTrouble')}</ButtonTertiaryLabel>
+						<ButtonTertiaryLabel>
+							<LinkText>{t('button.havingTrouble')}</LinkText>
+						</ButtonTertiaryLabel>
 					</Link>
 					<Link href={`https://pillarproject.io/`} target="_blank">
-						<ButtonTertiaryLabel>{t('button.whatIsSynthetix')}</ButtonTertiaryLabel>
+						<ButtonTertiaryLabel><LinkText>{t('button.whatIsSynthetix')}</LinkText></ButtonTertiaryLabel>
 					</Link>
 					<ExternalLink href={`https://github.com/Synthetixio/synthetix-mintr/`}>
 						<VersionLabel>v{process.env.REACT_APP_VERSION} - Forked from Mintr</VersionLabel>
@@ -189,18 +123,14 @@ const OnboardingContainer = styled.div`
 	padding: 42px;
 	background-color: ${props => props.theme.colorStyles.panels};
 	border-right: 1px solid ${props => props.theme.colorStyles.borders};
-`;
-
-const CarouselContainer = styled.div`
-	width: 70%;
-	margin: 0 auto 50px auto;
-	text-align: center;
-	margin-top: 40px;
+	justify-content: center;
 `;
 
 const OnboardingH1 = styled(H1)`
 	text-transform: none;
 	margin-bottom: 24px;
+	text-align: center;
+	justify-content: center;
 `;
 
 const OnboardingPMega = styled(PMega)`
@@ -213,14 +143,6 @@ const OnboardingPMega = styled(PMega)`
 
 const OnboardingIllustration = styled.img`
 	width: 60vw;
-`;
-
-const ButtonRow = styled.div`
-	display: flex;
-	width: 100%;
-	margin: auto;
-	justify-content: space-around;
-	max-width: 800px;
 `;
 
 const WalletConnectContainer = styled.div`
@@ -276,16 +198,21 @@ const Icon = styled.img`
 	margin-right: 24px;
 `;
 
+const LinkText = styled.span`
+	color: ${props => props.theme.colorStyles.panels};
+	font-size: 16px;
+`;
+
 const Link = styled.a`
-	background-color: ${props => props.theme.colorStyles.buttonTertiaryBgFocus};
-	border: 1px solid ${props => props.theme.colorStyles.borders};
-	text-transform: uppercase;
+	background-color: ${props => props.theme.colorStyles.buttonPrimaryBg};
+	border: 0px solid ${props => props.theme.colorStyles.borders};
+	text-transform: none;
 	font-size: 32px;
 	text-decoration: none;
 	width: 300px;
 	cursor: pointer;
 	height: 50px;
-	border-radius: 2px;
+	border-radius: 6px;
 	margin: 10px 0;
 	display: flex;
 	align-items: center;
@@ -297,8 +224,6 @@ const BottomLinks = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 `;
-
-const CarouselSlide = styled.div``;
 
 const Header = styled.div`
 	width: 100%;

@@ -2,8 +2,8 @@
 	"onboarding": {
 		"slides": {
 			"welcome": {
-				"title": "Welcome to Pillar",
-				"description": "PLR Rewards Dashboard is the dApp for PLR holders. If you've never used PLR Rewards Dashboard before, read through our quick introduction first."
+				"title": "Welcome to Pillar’s Rewards Program",
+				"description": "Here you can stake your PLR Liquidity tokens in order to receive your rewards. You can also claim your PLR tokens and exit at any time. Simply connect your wallet and select the pool you have already added liquidity to and stake your tokens."
 			},
 			"whatIsSynthetix": {
 				"title": "What is Synthetix?",

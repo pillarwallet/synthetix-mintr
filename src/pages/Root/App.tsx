@@ -13,7 +13,6 @@ import { getCurrentTheme, getCurrentPage } from 'ducks/ui';
 import MaintenancePage from '../MaintenanceMessage';
 import NotificationCenter from 'components/NotificationCenter';
 import Landing from '../Landing';
-import WalletSelection from '../WalletSelection';
 import Main from '../Main';
 import MobileLanding from '../MobileLanding';
 
@@ -39,8 +38,6 @@ const CurrentPage: FC<CurrentPageProps> = ({ isOnMaintenance, page }) => {
 	switch (page) {
 		case PAGES_BY_KEY.LANDING:
 			return <Landing />;
-		case PAGES_BY_KEY.WALLET_SELECTION:
-			return <WalletSelection />;
 		case PAGES_BY_KEY.MAIN:
 			return <Main />;
 		default:
