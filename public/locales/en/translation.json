@@ -2,7 +2,7 @@
 	"onboarding": {
 		"slides": {
 			"welcome": {
-				"title": "Welcome to Mintr!",
+				"title": "Welcome to Pillar",
 				"description": "Mintr is the dApp for SNX holders. If you've never used Mintr before, read through our quick introduction first."
 			},
 			"whatIsSynthetix": {
@@ -23,7 +23,7 @@
 			}
 		},
 		"walletConnection": {
-			"title": "Please connect a wallet with your SNX holdings to start:"
+			"title": "Please connect a wallet with your PLR holdings to start:"
 		},
 		"walletSelection": {
 			"success": {
@@ -549,8 +549,8 @@
 		"burnMax": "Burn max",
 		"fixCRatio": "Fix your Collateralization Ratio",
 		"edit": "Edit",
-		"havingTrouble": "Having trouble?",
-		"whatIsSynthetix": "What is Synthetix?",
+		"havingTrouble": "Support",
+		"whatIsSynthetix": "What is Pillar?",
 		"previous": "Previous",
 		"next": "Next",
 		"startOver": "Start over",

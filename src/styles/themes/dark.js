@@ -1,18 +1,20 @@
 import COLORS from '../colors';
 
 export default {
-	heading: COLORS.white,
-	body: COLORS.dark6,
-	subtext: COLORS.dark5,
-	borders: COLORS.dark4,
-	panels: COLORS.dark2,
-	background: COLORS.dark1,
+	heading: COLORS.textLight,
+	body: COLORS.textLight,
+	subtext: COLORS.textLight,
+	borders: COLORS.border,
+	panels: COLORS.totalBlack,
+	background: COLORS.purple,
 	hyperlink: COLORS.buttonLight,
 
 	buttonPrimaryText: COLORS.white,
-	buttonPrimaryBg: COLORS.buttonLight,
+	buttonPrimaryBg: COLORS.neonGreen,
 	buttonPrimaryBgFocus: COLORS.buttonDark,
 	buttonPrimaryBgDisabled: COLORS.buttonLightDisabled,
+
+	buttonSecondary: COLORS.secondaryButton,
 
 	buttonTertiaryText: COLORS.dark6,
 	buttonTertiaryBgFocus: COLORS.dark3,
@@ -22,7 +24,7 @@ export default {
 	simpleSelectHoveredOption: COLORS.dark4,
 
 	menu: COLORS.dark2,
-	panelButton: COLORS.dark3,
+	panelButton: COLORS.neonGreen,
 	panelButtonHover: COLORS.dark4,
 
 	accentDark: COLORS.dark7,

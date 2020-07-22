@@ -1,19 +1,17 @@
-import themeLight from './light';
 import themeDark from './dark';
 
 const fontFamilies = {
-	regular: 'apercu-regular',
-	medium: 'apercu-medium',
-	bold: 'apercu-bold',
+	regular: 'EuclidCircularB-Regular',
+	medium: 'Archia-medium'
 };
 
-export const isDarkTheme = theme => theme === 'dark';
-export const isLightTheme = theme => theme === 'light';
+export const isDarkTheme = theme => true;
+export const isLightTheme = theme => false;
 
 const theme = themeName => {
 	const themeIsDark = isDarkTheme(themeName);
 	const themeIsLight = isLightTheme(themeName);
-	const colorStyles = themeIsDark ? themeDark : themeLight;
+	const colorStyles = themeDark;
 	const textStyles = {
 		h1: {
 			as: 'h1',

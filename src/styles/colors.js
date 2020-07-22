@@ -6,6 +6,16 @@ export default {
 	brandRed: '#D94454',
 	brandPurple: '#935DFF',
 
+	// Pillar colors
+	purple: '#aa45ff',
+	textLight: '#f3e4ff',
+	headerLight: '#ffffff',
+	neonGreen: '#00ff24',
+	grey: '#e7e7e7',
+	totalBlack: '#000000',
+	secondaryButton: 'rgba(255, 255, 255, 0.15)',
+	border: '#3f3f3f',
+
 	// button palette
 	buttonDark: '#5A66F8',
 	buttonLight: '#727CFF',
@@ -40,5 +50,5 @@ export default {
 	dark8: '#6865A3',
 	dark9: '#E47C87',
 	// shadows:
-	darkShadow1: 'rgba(18, 18, 43, 0.3)',
+	darkShadow1: 'rgba(18, 18, 43, 0.0)',
 };

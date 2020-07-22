@@ -21,10 +21,6 @@ import { ButtonPrimary, ButtonSecondary } from '../../components/Button';
 import { H1, H2, PMega, ButtonTertiaryLabel } from '../../components/Typography';
 import Logo from '../../components/Logo';
 
-import { Globe } from '../../components/Icons';
-
-import { LanguageDropdown } from '../../components/Dropdown';
-
 import { PAGES_BY_KEY } from '../../constants/ui';
 import { ExternalLink } from 'styles/common';
 
@@ -115,23 +111,13 @@ const OnBoardingCarousel = ({ pageIndex, setPageIndex, currentTheme }) => {
 const Landing = ({ currentTheme, walletDetails, updateWalletStatus, setCurrentPage }) => {
 	const { t } = useTranslation();
 	const [pageIndex, setPageIndex] = useState(0);
-	const [flagDropdownIsVisible, setFlagVisibility] = useState(false);
+
 	const { derivationPath } = walletDetails;
 	return (
 		<LandingPageContainer>
 			<OnboardingContainer>
 				<Header>
 					<Logo />
-					<LanguageButtonWrapper>
-						<RoundButton onClick={() => setFlagVisibility(true)}>
-							<Globe />
-						</RoundButton>
-						<LanguageDropdown
-							isVisible={flagDropdownIsVisible}
-							setIsVisible={setFlagVisibility}
-							position={{ right: 0 }}
-						/>
-					</LanguageButtonWrapper>
 				</Header>
 				<OnBoardingCarousel
 					pageIndex={pageIndex}
@@ -267,15 +253,15 @@ const Wallets = styled.div`
 const Button = styled.button`
 	height: 80px;
 	width: 100%;
-	border-radius: 2px;
 	padding: 16px 48px;
 	margin: 10px 0;
 	display: flex;
 	justify-content: left;
 	align-items: center;
 	background-color: ${props => props.theme.colorStyles.panelButton};
-	border: 1px solid ${props => props.theme.colorStyles.borders};
-	box-shadow: 0px 5px 10px 5px ${props => props.theme.colorStyles.shadow1};
+	border-radius: 6px;
+	border-style: none;
+	box-shadow: 0px 0px 0px 0px ${props => props.theme.colorStyles.shadow1};
 	opacity: ${props => (props.disabled ? '0.4' : 1)};
 	cursor: pointer;
 	transition: all 0.1s ease;
@@ -288,6 +274,7 @@ const WalletConnectionH2 = styled(H2)`
 	text-transform: capitalize;
 	margin: 0;
 	font-size: 18px;
+	color: ${props => props.theme.colorStyles.panels};
 `;
 
 const Icon = styled.img`
@@ -325,24 +312,6 @@ const Header = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-`;
-
-const RoundButton = styled.button`
-	margin: 0 5px;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: 30px;
-	padding: 0;
-	height: 40px;
-	width: 40px;
-	border: 1px solid ${props => props.theme.colorStyles.borders};
-	background-color: ${props => props.theme.colorStyles.buttonTertiaryBgFocus};
-`;
-
-const LanguageButtonWrapper = styled.div`
-	position: relative;
 `;
 
 const VersionLabel = styled.div`

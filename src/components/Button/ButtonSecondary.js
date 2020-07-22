@@ -25,15 +25,15 @@ const Button = styled.button`
 	justify-content: center;
 	align-items: center;
 	height: ${props => (props.height ? props.height : '72px')};
-	border-radius: 5px;
 	text-transform: uppercase;
-	border: 2px solid ${props => props.theme.colorStyles.buttonPrimaryBg};
 	cursor: pointer;
-	background-color: transparent;
+	background-color: ${props => props.theme.colorStyles.buttonSecondary};
 	transition: all ease-in 0.1s;
 	&:hover {
 		background-color: ${props => props.theme.colorStyles.buttonTertiaryBgFocus};
 	}
+	border-radius: 10px;
+	border-style: none;
 `;
 
 export default ButtonSecondary;
