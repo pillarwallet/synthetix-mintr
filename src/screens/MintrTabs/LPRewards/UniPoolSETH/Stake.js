@@ -160,7 +160,7 @@ const Stake = ({ walletDetails, goBack }) => {
 								contract: 'unipoolSETHContract',
 								action: 'claim',
 								label: t('lpRewards.shared.actions.claiming'),
-								amount: `${balances && formatCurrency(balances.rewards)} SNX`,
+								amount: `${balances && formatCurrency(balances.rewards)} PLR`,
 								...TRANSACTION_DETAILS['claim'],
 							})
 						}
@@ -177,7 +177,7 @@ const Stake = ({ walletDetails, goBack }) => {
 								contract: 'unipoolSETHContract',
 								action: 'unstake',
 								label: t('lpRewards.shared.actions.unstaking'),
-								amount: `${balances && formatCurrency(balances.univ1Staked)} UNI-V1`,
+								amount: `${balances && formatCurrency(balances.univ1Staked)} UNI-V2`,
 								param: balances && balances.univ1StakedBN,
 								...TRANSACTION_DETAILS['unstake'],
 							})
@@ -193,9 +193,9 @@ const Stake = ({ walletDetails, goBack }) => {
 								contract: 'unipoolSETHContract',
 								action: 'exit',
 								label: t('lpRewards.shared.actions.exiting'),
-								amount: `${balances && formatCurrency(balances.univ1Staked)} UNI-V1 & ${
+								amount: `${balances && formatCurrency(balances.univ1Staked)} UNI-V2 & ${
 									balances && formatCurrency(balances.rewards)
-								} SNX`,
+								} PLR`,
 								...TRANSACTION_DETAILS['exit'],
 							})
 						}

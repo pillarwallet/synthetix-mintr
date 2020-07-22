@@ -108,7 +108,7 @@ const Box = styled.div`
 
 const Amount = styled.span`
 	color: ${props => props.theme.colorStyles.hyperlink};
-	font-family: 'apercu-medium';
+	font-family: 'archia-medium';
 	font-size: 24px;
 	margin: 16px 0px 0px 0px;
 `;
