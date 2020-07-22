@@ -6,7 +6,7 @@ import {
 	PORTIS_APP_ID,
 } from './networkHelper';
 import { ethers } from 'ethers';
-import { uniswapV2, unipoolSETH, synthSummary } from './contracts';
+import { uniswapV2, unipoolSETH } from './contracts';
 
 let snxJSConnector = {
 	initialized: false,
@@ -28,11 +28,6 @@ let snxJSConnector = {
 				this.signer
 			);
 		}
-		this.synthSummaryUtilContract = new ethers.Contract(
-			synthSummary.addresses[contractSettings.networkId],
-			synthSummary.abi,
-			this.provider
-		);
 	},
 };
 

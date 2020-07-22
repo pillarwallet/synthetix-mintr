@@ -144,7 +144,7 @@ const Stake = ({ walletDetails, goBack }) => {
 								contract: 'unipoolSETHContract',
 								action: 'stake',
 								label: t('lpRewards.shared.actions.staking'),
-								amount: `${balances && formatCurrency(balances.univ1Held)} UNI-V1`,
+								amount: `${balances && formatCurrency(balances.univ1Held)} UNI-V2`,
 								param: balances && balances.univ1HeldBN,
 								...TRANSACTION_DETAILS['stake'],
 							})
