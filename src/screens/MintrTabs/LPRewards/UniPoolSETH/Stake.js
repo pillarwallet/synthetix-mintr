@@ -123,15 +123,15 @@ const Stake = ({ walletDetails, goBack }) => {
 			<BoxRow>
 				<DataBox
 					heading={t('lpRewards.shared.data.balance')}
-					body={`${balances ? formatCurrency(balances.univ1Held) : 0} UNI-V1`}
+					body={`${balances ? formatCurrency(balances.univ1Held) : 0} UNI-V2`}
 				/>
 				<DataBox
 					heading={t('lpRewards.shared.data.staked')}
-					body={`${balances ? formatCurrency(balances.univ1Staked) : 0} UNI-V1`}
+					body={`${balances ? formatCurrency(balances.univ1Staked) : 0} UNI-V2`}
 				/>
 				<DataBox
 					heading={t('lpRewards.shared.data.rewardsAvailable')}
-					body={`${balances ? formatCurrency(balances.rewards) : 0} SNX`}
+					body={`${balances ? formatCurrency(balances.rewards) : 0} PLR`}
 				/>
 			</BoxRow>
 			<ButtonBlock>

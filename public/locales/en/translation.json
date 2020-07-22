@@ -353,15 +353,8 @@
 		},
 		"actions": {
 			"unipoolSETH": {
-				"title": "UNIPOOL sETH"
-			},
-			"unipoolSXAU": {
-				"title": "UNIPOOL sXAU"
-			},
-			"curvepool": { "title": "CURVEPOOL sUSD" },
-			"ieth": { "title": "iETH" },
-			"balancer": {"title": "BALANCER SNX"},
-			"curvepoolSBTC": {"title": "CURVEPOOL sBTC"}
+				"title": "Uniswap v2 ETHPLR"
+			}
 		},
 		"shared": {
 			"unlocked": {
@@ -396,64 +389,13 @@
 		}
 	},
 	"unipoolSETH": {
-		"title": "Uniswap sETH LP Token Rewards",
+		"title": "Uniswap ETHPLR LP Token Rewards",
 		"locked": {
-			"subtitle": "First approve the Unipool contract to transfer your sETH UNI-V1 tokens for staking.",
-			"transaction": "Setting Uni-V1 LP token allowance"
-		},
-		"unlocked": {
-			"subtitle": "Here you can stake your UNI-V1 Liquidity Provider (LP) tokens, claim SNX rewards, or exit completely."
-		}
-	},
-	"unipoolSXAU": {
-		"title": "Uniswap sXAU LP Token Rewards",
-		"locked": {
-			"subtitle": "First approve the Unipool contract to transfer your sXAU UNI-V2 tokens for staking.",
+			"subtitle": "First approve the Unipool contract to transfer your ETHPLR UNI-V2 tokens for staking.",
 			"transaction": "Setting Uni-V2 LP token allowance"
 		},
 		"unlocked": {
-			"subtitle": "Here you can stake your UNI-V2 Liquidity Provider (LP) tokens, claim SNX rewards, or exit completely."
-		}
-	},
-	"ieth": {
-		"title": "iETH Rewards",
-		"locked": {
-			"subtitle": "First approve the iEthRewards contract to transfer your iETH synths for staking.",
-			"transaction": "Setting iETH allowance"
-		},
-		"unlocked": {
-			"subtitle": "Here you can stake your iETH synths, claim SNX rewards, or exit completely.",
-			"settle-info": "You need to settle before being able to stake your iETH."
-		}
-	},
-	"curvepool": {
-		"title": "Curve Finance sUSD LP Token Rewards",
-		"locked": {
-			"subtitle": "First approve the Curvepool contract to transfer your Curve LP tokens for staking.",
-			"transaction": "Setting Curve LP token allowance"
-		},
-		"unlocked": {
-			"subtitle": "Here you can stake your Curve LP tokens, claim SNX rewards, or exit completely."
-		}
-	},
-	"curvepoolSBTC": {
-		"title": "Curve Tokenised BTC LP Token Rewards",
-		"locked": {
-			"subtitle": "First approve the Curvepool contract to transfer your Curve LP tokens for staking.",
-			"transaction": "Setting Curve LP token allowance"
-		},
-		"unlocked": {
-			"subtitle": "Here you can stake your Curve LP tokens, claim BPT rewards, or exit completely."
-		}
-	},
-	"balancerSNX": {
-		"title": "Balancer SNX/USDC Pool Token Rewards",
-		"locked": {
-			"subtitle": "First approve the Balancer Pool contract to transfer your BPT tokens for staking.",
-			"transaction": "Setting Balancer BPT token allowance"
-		},
-		"unlocked": {
-			"subtitle": "Here you can stake your Balancer (BPT) tokens, claim SNX rewards, or exit completely."
+			"subtitle": "Here you can stake your UNI-V2 Liquidity Provider (LP) tokens, claim PLR rewards, or exit completely."
 		}
 	},
 	"delegation": {

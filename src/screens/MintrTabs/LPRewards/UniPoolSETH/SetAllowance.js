@@ -54,7 +54,7 @@ const SetAllowance = ({ createTransaction, goBack, currentGasPrice }) => {
 				<ButtonTertiary onClick={goBack}>{t('button.navigation.back')}</ButtonTertiary>
 			</Navigation>
 			<TitleContainer>
-				<Logo src="/images/pools/unipool-sETH.svg" />
+				<Logo src="/images/ethplruni-color.svg" />
 				<PageTitle>{t('unipoolSETH.title')}</PageTitle>
 				<PLarge>{t('unipoolSETH.locked.subtitle')}</PLarge>
 			</TitleContainer>

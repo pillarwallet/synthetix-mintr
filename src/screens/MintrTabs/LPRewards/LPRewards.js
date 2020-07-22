@@ -21,7 +21,7 @@ const POOLS_MAJOR = [
 	{
 		title: 'lpRewards.actions.unipoolSETH.title',
 		name: 'unipoolSETH',
-		image: '/images/pools/unipool-sETH.svg',
+		image: '/images/ethplruni-color.svg',
 		contract: 'unipoolSETHContract',
 	},
 ];
@@ -72,7 +72,7 @@ const LPRewards = ({ currentTheme }) => {
 				getPoolComponent(currentPool)
 			) : (
 				<>
-					<PageTitle>{t('lpRewards.intro.title')}</PageTitle>
+					<PageTitleCentered>{t('lpRewards.intro.title')}</PageTitleCentered>
 					{[POOLS_MAJOR, POOLS_SECONDARY].map((pools, i) => {
 						return (
 							<ButtonRow key={`pool-${i}`}>
@@ -122,6 +122,11 @@ const LPRewards = ({ currentTheme }) => {
 	);
 };
 
+const PageTitleCentered = styled(PageTitle)`
+	text-align: center;
+	justify-content: center;
+`;
+
 const CompletedLabel = styled(FlexDivCentered)`
 	justify-content: center;
 	border-radius: 1000px;
@@ -164,6 +169,7 @@ const ButtonRow = styled.div`
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	grid-gap: 20px;
+	justify-content: 'center';
 `;
 
 const ActionImage = styled.img`
