@@ -19,19 +19,19 @@ const ButtonTertiary = ({
 };
 
 const Button = styled.button`
-	background-color: transparent;
-	border: 1px solid ${props => props.theme.colorStyles.borders};
+	background-color: ${props => props.theme.colorStyles.buttonSecondary};
+	border: 0px solid ${props => props.theme.colorStyles.borders};
 	height: 40px;
 	padding: 2px 20px 0 20px;
-	border-radius: 20px;
+	border-radius: 10px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	font-size: 14px;
+	font-size: 16px;
 	transition: all ease-in 0.1s;
 	&:hover,
 	&:focus {
-		background-color: ${props => props.theme.colorStyles.buttonTertiaryBgFocus};
+		transform: translateY(-2px);
 	}
 	cursor: pointer;
 	text-decoration: none;

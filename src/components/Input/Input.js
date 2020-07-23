@@ -156,7 +156,7 @@ const InputWrapper = styled.div`
 const InputInner = styled.div`
 	display: flex;
 	width: 100%;
-	border-radius: 5px;
+	border-radius: 10px;
 	height: 64px;
 	border: 1px solid ${props => props.theme.colorStyles.borders};
 	background-color: ${props => props.theme.colorStyles.panelButton};
@@ -201,8 +201,10 @@ const InputElement = styled.input`
 	border: none;
 	background-color: ${props => props.theme.colorStyles.panelButton};
 	outline: none;
-	font-size: 24px;
-	color: ${props => props.theme.colorStyles.heading};
+	font-size: 20px;
+	font-family: 'EuclidCircularB-regular'
+	color: ${props => props.theme.colorStyles.panels};
+	border-radius: 10px;
 `;
 
 const ListInputWrapper = styled.div`
