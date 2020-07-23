@@ -8,12 +8,9 @@ import { showModal } from '../../ducks/modal';
 import { getEthRate } from '../../ducks/rates';
 
 import { Subtext } from '../Typography';
-import { formatCurrency } from '../../helpers/formatters';
 import { MicroSpinner } from '../Spinner';
 
 import { MODAL_TYPES_TO_KEY } from '../../constants/modal';
-
-import { getTransactionPrice } from '../../helpers/networkHelper';
 
 const TransactionPriceIndicator = ({
 	canEdit = true,
@@ -35,13 +32,7 @@ const TransactionPriceIndicator = ({
 					<MicroSpinner />
 				) : (
 					<Fragment>
-						<Subtext>
-							{currentGasPrice
-								? `$${formatCurrency(
-										getTransactionPrice(currentGasPrice.price, gasLimit, ethRate)
-								  )} / ${currentGasPrice.price} GWEI`
-								: 0}
-						</Subtext>
+						<Subtext>{`${currentGasPrice.price} GWEI`}</Subtext>
 						{canEdit ? (
 							<Button
 								onClick={() =>

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import { formatCurrency } from '../../helpers/formatters';
 import { getTransactionPrice } from '../../helpers/networkHelper';
 
 import { setCurrentGasPrice, getNetworkPrices, getCurrentGasPrice } from '../../ducks/network';
@@ -27,7 +26,6 @@ const RatesData = ({ gasInfo }) => {
 							<DataHeaderLarge marginBottom="8px" style={{ textTransform: 'capitalize' }}>
 								{t(`transactionSettings.speed.${gas.speed.toLowerCase()}`)}
 							</DataHeaderLarge>
-							<DataLarge marginBottom="4px">${formatCurrency(gas.transactionPrice)}</DataLarge>
 							<DataLarge marginBottom="4px">{`${gas.price} GWEI`}</DataLarge>
 							<DataLarge marginBottom="4px">
 								{gas.time} {t('transactionSettings.minutes')}
@@ -44,7 +42,6 @@ const renderTooltipContent = (gasPrice, transactionPrice) => {
 	return (
 		<TooltipInner>
 			<TooltipValue>{gasPrice} GWEI</TooltipValue>
-			<TooltipValue>${formatCurrency(transactionPrice)}</TooltipValue>
 		</TooltipInner>
 	);
 };
