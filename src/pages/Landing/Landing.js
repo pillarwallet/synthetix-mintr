@@ -178,7 +178,7 @@ const Button = styled.button`
 	cursor: pointer;
 	transition: all 0.1s ease;
 	:hover {
-		background-color: ${props => props.theme.colorStyles.panelButtonHover};
+		transform: translateY(-2px);
 	}
 `;
 
