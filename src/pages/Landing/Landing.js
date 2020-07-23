@@ -44,16 +44,18 @@ const onWalletClick = ({ wallet, derivationPath, updateWalletStatus, setCurrentP
 	};
 };
 
-const OnBoardingCarousel = ({ currentTheme }) => {
+const OnBoardingMessage = () => {
 	const { t } = useTranslation();
 	return (
 		<>
 			<OnboardingH1>{t('onboarding.slides.welcome.title')}</OnboardingH1>
+			<OnboardingIllustrationContainer>
+				<OnboardingIllustration
+					style={{ marginTop: '20px', marginBottom: '20px' }}
+					src={`/images/ill-rewards.svg`}
+				/>
+			</OnboardingIllustrationContainer>
 			<OnboardingPMega>{t('onboarding.slides.welcome.description')}</OnboardingPMega>
-			<OnboardingIllustration
-				style={{ marginTop: '20px' }}
-				src={`/images/onboarding/welcome-${currentTheme ? 'dark' : 'light'}.png`}
-			/>
 		</>
 	);
 };
@@ -68,7 +70,7 @@ const Landing = ({ currentTheme, walletDetails, updateWalletStatus, setCurrentPa
 				<Header>
 					<Logo />
 				</Header>
-				<OnBoardingCarousel currentTheme={currentTheme} />
+				<OnBoardingMessage />
 			</OnboardingContainer>
 			<WalletConnectContainer>
 				<Wallets>
@@ -138,8 +140,17 @@ const OnboardingPMega = styled(PMega)`
 	max-width: 600px;
 `;
 
+const OnboardingIllustrationContainer = styled.div`
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: center;
+	text-align: center;
+`;
+
 const OnboardingIllustration = styled.img`
-	width: 60vw;
+	width: 232px;
+	height: 232px;
 `;
 
 const WalletConnectContainer = styled.div`
