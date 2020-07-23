@@ -91,7 +91,7 @@ const LPRewards = ({ currentTheme }) => {
 														<StyledDataLarge>10,000 SNX</StyledDataLarge>
 														<StyledDataLarge>25,000 REN</StyledDataLarge>
 													</DistributionRow>
-												) : !['unipoolSETH', 'unipoolSXAU', 'balancerSNX'].includes(name) ? (
+												) : ['unipoolSETH', 'unipoolSXAU', 'balancerSNX'].includes(name) ? (
 													<StyledDataLarge>{formatCurrency(distribution, 0)} PLR</StyledDataLarge>
 												) : (
 													<CompletedLabel>
@@ -183,8 +183,8 @@ const StyledHeading = styled(H1)`
 `;
 
 const StyledDataLarge = styled(DataLarge)`
-	color: ${props => props.theme.colorStyles.body};
-	font-size: 22px;
+	color: ${props => props.theme.colorStyles.panels};
+	font-size: 16px;
 `;
 
 const DistributionRow = styled.div`
