@@ -22,7 +22,7 @@ const Button = styled.button`
 	width: ${props => (props.width ? props.width : '400px')};
 	height: ${props => (props.height ? props.height : '72px')};
 	border-radius: 10px;
-	text-transform: uppercase;
+	text-transform: none;
 	border: none;
 	cursor: pointer;
 	background-color: ${props => props.theme.colorStyles.buttonPrimaryBg};
@@ -32,8 +32,9 @@ const Button = styled.button`
 		cursor: not-allowed;
 	}
 	&:hover:not(:disabled) {
-		background-color: ${props => props.theme.colorStyles.buttonPrimaryBgFocus};
+		transform: translateY(-2px);
 	}
+	font-size: 20px;
 `;
 
 const ButtonMedium = styled(Button)`

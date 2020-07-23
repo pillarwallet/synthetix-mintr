@@ -21,9 +21,6 @@ import Logo from '../../components/Logo';
 import { PAGES_BY_KEY } from '../../constants/ui';
 import { ExternalLink } from 'styles/common';
 
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import './carousel.css';
-
 const onWalletClick = ({ wallet, derivationPath, updateWalletStatus, setCurrentPage }) => {
 	return async () => {
 		const walletStatus = await connectToWallet({ wallet, derivationPath });

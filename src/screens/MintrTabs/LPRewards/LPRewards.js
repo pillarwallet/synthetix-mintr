@@ -148,9 +148,8 @@ const Button = styled.button`
 	border-radius: 5px;
 	box-shadow: 0px 5px 10px 5px ${props => props.theme.colorStyles.shadow1};
 	transition: transform ease-in 0.2s;
+	width: 33%;
 	&:hover {
-		background-color: ${props => props.theme.colorStyles.panelButtonHover};
-		box-shadow: 0px 5px 10px 8px ${props => props.theme.colorStyles.shadow1};
 		transform: translateY(-2px);
 	}
 `;
@@ -166,10 +165,10 @@ const ButtonHeading = styled.div`
 
 const ButtonRow = styled.div`
 	margin-top: 20px;
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-gap: 20px;
-	justify-content: 'center';
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 `;
 
 const ActionImage = styled.img`

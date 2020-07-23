@@ -104,14 +104,14 @@ const Stake = ({ walletDetails, goBack }) => {
 		<Container>
 			<UnipoolActions {...currentScenario} onDestroy={() => setCurrentScenario({})} />
 			<Navigation>
-				<ButtonTertiary onClick={goBack}>{t('button.navigation.back')}</ButtonTertiary>
-				<ButtonTertiary
+				<NavButton onClick={goBack}>{t('button.navigation.back')}</NavButton>
+				<NavButton
 					as="a"
 					target="_blank"
 					href={`https://etherscan.io/address/${unipoolSETHContract.address}`}
 				>
 					{t('lpRewards.shared.buttons.goToContract')} ↗
-				</ButtonTertiary>
+				</NavButton>
 			</Navigation>
 			<PageTitle>{t('unipoolSETH.title')}</PageTitle>
 			<PLarge>{t('unipoolSETH.unlocked.subtitle')}</PLarge>
@@ -209,6 +209,11 @@ const Stake = ({ walletDetails, goBack }) => {
 	);
 };
 
+const NavButton = styled(ButtonTertiary)`
+	border-radius: 10px;
+	background-color: ${props => props.theme.colorStyles.buttonSecondary};
+`;
+
 const Link = styled.a`
 	text-decoration-color: ${props => props.theme.colorStyles.buttonTertiaryText};
 `;
@@ -244,6 +249,7 @@ const ButtonAction = styled(ButtonPrimary)`
 	&:first-child {
 		margin-right: 34px;
 	}
+	text-transform: none;
 `;
 
 const mapStateToProps = state => ({

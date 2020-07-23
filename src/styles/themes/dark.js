@@ -7,9 +7,9 @@ export default {
 	borders: COLORS.border,
 	panels: COLORS.totalBlack,
 	background: COLORS.purple,
-	hyperlink: COLORS.buttonLight,
+	hyperlink: COLORS.purple,
 
-	buttonPrimaryText: COLORS.white,
+	buttonPrimaryText: COLORS.totalBlack,
 	buttonPrimaryBg: COLORS.neonGreen,
 	buttonPrimaryBgFocus: COLORS.buttonDark,
 	buttonPrimaryBgDisabled: COLORS.buttonLightDisabled,
