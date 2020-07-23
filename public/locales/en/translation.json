@@ -337,7 +337,7 @@
 		},
 		"actions": {
 			"unipoolSETH": {
-				"title": "Uniswap v2 ETHPLR"
+				"title": "Uniswap v2 ETH-PLR"
 			}
 		},
 		"shared": {
@@ -373,9 +373,9 @@
 		}
 	},
 	"unipoolSETH": {
-		"title": "Uniswap ETHPLR LP Token Rewards",
+		"title": "Uniswap ETH-PLR LP Token Rewards",
 		"locked": {
-			"subtitle": "First approve the Unipool contract to transfer your ETHPLR UNI-V2 tokens for staking.",
+			"subtitle": "First approve the Unipool contract to transfer your ETH-PLR UNI-V2 tokens for staking.",
 			"transaction": "Setting Uni-V2 LP token allowance"
 		},
 		"unlocked": {
