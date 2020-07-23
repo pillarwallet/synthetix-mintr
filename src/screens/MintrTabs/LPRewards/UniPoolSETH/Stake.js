@@ -9,7 +9,7 @@ import { bigNumberFormatter, formatCurrency } from '../../../../helpers/formatte
 import TransactionPriceIndicator from '../../../../components/TransactionPriceIndicator';
 import { getWalletDetails } from '../../../../ducks/wallet';
 
-import { PageTitle, PLarge, ButtonTertiaryLabel } from '../../../../components/Typography';
+import { PageTitle, PLarge } from '../../../../components/Typography';
 import DataBox from '../../../../components/DataBox';
 import { ButtonTertiary, ButtonPrimary } from '../../../../components/Button';
 
@@ -115,11 +115,6 @@ const Stake = ({ walletDetails, goBack }) => {
 			</Navigation>
 			<PageTitle>{t('unipoolSETH.title')}</PageTitle>
 			<PLarge>{t('unipoolSETH.unlocked.subtitle')}</PLarge>
-			<PLarge>
-				<Link href="https://blog.synthetix.io/new-uniswap-seth-lp-reward-system/" target="_blank">
-					<ButtonTertiaryLabel>{t('lpRewards.shared.unlocked.link')}</ButtonTertiaryLabel>
-				</Link>
-			</PLarge>
 			<BoxRow>
 				<DataBox
 					heading={t('lpRewards.shared.data.balance')}
@@ -208,10 +203,6 @@ const Stake = ({ walletDetails, goBack }) => {
 		</Container>
 	);
 };
-
-const Link = styled.a`
-	text-decoration-color: ${props => props.theme.colorStyles.buttonTertiaryText};
-`;
 
 const Container = styled.div`
 	min-height: 850px;
