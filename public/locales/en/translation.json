@@ -336,7 +336,7 @@
 			"completed": "Completed"
 		},
 		"actions": {
-			"unipoolSETH": {
+			"unipoolPLR": {
 				"title": "Uniswap v2 ETH-PLR"
 			}
 		},
@@ -372,7 +372,7 @@
 			}
 		}
 	},
-	"unipoolSETH": {
+	"unipoolPLR": {
 		"title": "Uniswap ETH-PLR LP Token Rewards",
 		"locked": {
 			"subtitle": "First approve the Unipool contract to transfer your ETH-PLR UNI-V2 tokens for staking.",

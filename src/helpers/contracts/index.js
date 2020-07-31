@@ -1,4 +1,4 @@
 import uniswapV2 from './uniswap/uniswap-v2';
-import unipoolSETH from './uniswap/unipool-sETH';
+import unipoolPLR from './uniswap/unipool-PLR';
 
-export { uniswapV2, unipoolSETH };
+export { uniswapV2, unipoolPLR };

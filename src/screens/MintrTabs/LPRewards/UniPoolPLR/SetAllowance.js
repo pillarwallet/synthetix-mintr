@@ -19,16 +19,16 @@ const SetAllowance = ({ createTransaction, goBack, currentGasPrice }) => {
 
 	const onUnlock = async () => {
 		const { parseEther } = snxJSConnector.utils;
-		const { uniswapV2Contract, unipoolSETHContract } = snxJSConnector;
+		const { uniswapV2Contract, unipoolPLRContract } = snxJSConnector;
 		try {
 			setError(null);
 
 			const gasEstimate = await uniswapV2Contract.estimate.approve(
-				unipoolSETHContract.address,
+				unipoolPLRContract.address,
 				parseEther(TOKEN_ALLOWANCE_LIMIT.toString())
 			);
 			const transaction = await uniswapV2Contract.approve(
-				unipoolSETHContract.address,
+				unipoolPLRContract.address,
 				parseEther(TOKEN_ALLOWANCE_LIMIT.toString()),
 				{
 					gasLimit: Number(gasEstimate) + 10000,
@@ -39,7 +39,7 @@ const SetAllowance = ({ createTransaction, goBack, currentGasPrice }) => {
 				createTransaction({
 					hash: transaction.hash,
 					status: 'pending',
-					info: t('unipoolSETH.locked.transaction'),
+					info: t('unipoolPLR.locked.transaction'),
 					hasNotification: true,
 				});
 			}
@@ -55,8 +55,8 @@ const SetAllowance = ({ createTransaction, goBack, currentGasPrice }) => {
 			</Navigation>
 			<TitleContainer>
 				<Logo src="/images/ethplruni-color.svg" />
-				<PageTitle>{t('unipoolSETH.title')}</PageTitle>
-				<PLarge>{t('unipoolSETH.locked.subtitle')}</PLarge>
+				<PageTitle>{t('unipoolPLR.title')}</PageTitle>
+				<PLarge>{t('unipoolPLR.locked.subtitle')}</PLarge>
 			</TitleContainer>
 			<ButtonRow>
 				<ButtonPrimary onClick={onUnlock}>{t('lpRewards.shared.buttons.unlock')}</ButtonPrimary>

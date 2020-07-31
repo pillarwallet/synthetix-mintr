@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-import UnipoolSETH from './UniPoolSETH';
+import UnipoolPLR from './UniPoolPLR';
 
 import { getCurrentTheme } from 'ducks/ui';
 
@@ -19,10 +19,10 @@ import { formatCurrency } from 'helpers/formatters';
 
 const POOLS_MAJOR = [
 	{
-		title: 'lpRewards.actions.unipoolSETH.title',
-		name: 'unipoolSETH',
+		title: 'lpRewards.actions.unipoolPLR.title',
+		name: 'unipoolPLR',
 		image: '/images/ethplruni-color.svg',
-		contract: 'unipoolSETHContract',
+		contract: 'unipoolPLRContract',
 	},
 ];
 
@@ -35,11 +35,11 @@ const LPRewards = ({ currentTheme }) => {
 	const goBack = () => setCurrentPool(null);
 
 	useEffect(() => {
-		const { unipoolSETHContract } = snxJSConnector;
+		const { unipoolPLRContract } = snxJSConnector;
 
 		const getRewardsAmount = async () => {
 			try {
-				const contracts = [unipoolSETHContract];
+				const contracts = [unipoolPLRContract];
 				const rewardsData = await Promise.all(
 					contracts.map(contract => Promise.all([contract.DURATION(), contract.rewardRate()]))
 				);
@@ -59,8 +59,8 @@ const LPRewards = ({ currentTheme }) => {
 
 	const getPoolComponent = poolName => {
 		switch (poolName) {
-			case 'unipoolSETH':
-				return <UnipoolSETH goBack={goBack} />;
+			case 'unipoolPLR':
+				return <UnipoolPLR goBack={goBack} />;
 			default:
 				return null;
 		}
@@ -91,7 +91,7 @@ const LPRewards = ({ currentTheme }) => {
 														<StyledDataLarge>10,000 SNX</StyledDataLarge>
 														<StyledDataLarge>25,000 REN</StyledDataLarge>
 													</DistributionRow>
-												) : ['unipoolSETH', 'unipoolSXAU', 'balancerSNX'].includes(name) ? (
+												) : ['unipoolPLR', 'unipoolSXAU', 'balancerSNX'].includes(name) ? (
 													<StyledDataLarge>{formatCurrency(distribution, 0)} PLR</StyledDataLarge>
 												) : (
 													<CompletedLabel>
