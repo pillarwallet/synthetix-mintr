@@ -144,7 +144,7 @@ const Stake = ({ walletDetails, goBack, stakeContract }) => {
 								contract: stakeContract,
 								action: 'stake',
 								label: t('lpRewards.shared.actions.staking'),
-								amount: `${balances && formatCurrency(balances.univ1Held)} UNI-V2`,
+								amount: `${balances && formatCurrency(balances.univ1Held)} BPT`,
 								param: balances && balances.univ1HeldBN,
 								...TRANSACTION_DETAILS['stake'],
 							})
@@ -177,7 +177,7 @@ const Stake = ({ walletDetails, goBack, stakeContract }) => {
 								contract: stakeContract,
 								action: 'unstake',
 								label: t('lpRewards.shared.actions.unstaking'),
-								amount: `${balances && formatCurrency(balances.univ1Staked)} UNI-V2`,
+								amount: `${balances && formatCurrency(balances.univ1Staked)} BPT`,
 								param: balances && balances.univ1StakedBN,
 								...TRANSACTION_DETAILS['unstake'],
 							})
@@ -193,7 +193,7 @@ const Stake = ({ walletDetails, goBack, stakeContract }) => {
 								contract: stakeContract,
 								action: 'exit',
 								label: t('lpRewards.shared.actions.exiting'),
-								amount: `${balances && formatCurrency(balances.univ1Staked)} UNI-V2 & ${
+								amount: `${balances && formatCurrency(balances.univ1Staked)} BPT & ${
 									balances && formatCurrency(balances.rewards)
 								} PLR`,
 								...TRANSACTION_DETAILS['exit'],
