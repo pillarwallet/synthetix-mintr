@@ -6,7 +6,7 @@ import {
 	PORTIS_APP_ID,
 } from './networkHelper';
 import { ethers } from 'ethers';
-import { uniswapV2, unipoolPLR } from './contracts';
+import { uniswapV2, unipoolPLR, balpool } from './contracts';
 
 let snxJSConnector = {
 	initialized: false,
@@ -22,6 +22,7 @@ let snxJSConnector = {
 
 		if (this.signer) {
 			this.uniswapV2Contract = new ethers.Contract(uniswapV2.address, uniswapV2.abi, this.signer);
+			this.balancerMTAUSDCContract = new ethers.Contract('0x399c1F06b16034c625bAa7996C4D38D72aec9681', balpool.abi, this.signer);
 			this.unipoolPLRContract = new ethers.Contract(
 				unipoolPLR.address,
 				unipoolPLR.abi,
@@ -29,6 +30,19 @@ let snxJSConnector = {
 			);
 		}
 	},
+	balancerPools: {},
+	getBalancerPoolContract: function (address) {
+		if (!this.signer)
+			return null;
+
+		if (address in this.balancerPools) {
+			return this.balancerPools[address];
+		}
+		console.log(address);
+		const contract = new ethers.Contract(address, uniswapV2.abi, this.signer);
+		this.balancerPools[address] = contract;
+		return contract;
+	}
 };
 
 const connectToMetamask = async (networkId, networkName) => {

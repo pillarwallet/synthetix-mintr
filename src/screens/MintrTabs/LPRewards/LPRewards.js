@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import UnipoolPLR from './UniPoolPLR';
+import BalPool from './BalPool';
 
 import { getCurrentTheme } from 'ducks/ui';
 
@@ -24,9 +25,13 @@ const POOLS_MAJOR = [
 		image: '/images/ethplruni-color.svg',
 		contract: 'unipoolPLRContract',
 	},
+	{
+		title: 'lpRewards.actions.balancerMTAUSDC.title',
+		name: 'balancerMTAUSDC',
+		image: '/images/ethplruni-color.svg',
+		contract: 'balancerMTAUSDCContract',
+	},
 ];
-
-const POOLS_SECONDARY = [];
 
 const LPRewards = ({ currentTheme }) => {
 	const { t } = useTranslation();
@@ -35,11 +40,11 @@ const LPRewards = ({ currentTheme }) => {
 	const goBack = () => setCurrentPool(null);
 
 	useEffect(() => {
-		const { unipoolPLRContract } = snxJSConnector;
+		const { unipoolPLRContract, balancerMTAUSDCContract } = snxJSConnector;
 
 		const getRewardsAmount = async () => {
 			try {
-				const contracts = [unipoolPLRContract];
+				const contracts = [unipoolPLRContract, balancerMTAUSDCContract];
 				const rewardsData = await Promise.all(
 					contracts.map(contract => Promise.all([contract.DURATION(), contract.rewardRate()]))
 				);
@@ -61,6 +66,13 @@ const LPRewards = ({ currentTheme }) => {
 		switch (poolName) {
 			case 'unipoolPLR':
 				return <UnipoolPLR goBack={goBack} />;
+			case 'balancerMTAUSDC':
+				return (
+					<BalPool
+						stakeContract="balancerMTAUSDCContract"
+						goBack={goBack}
+					/>
+				);
 			default:
 				return null;
 		}
@@ -73,7 +85,7 @@ const LPRewards = ({ currentTheme }) => {
 			) : (
 				<>
 					<PageTitleCentered>{t('lpRewards.intro.title')}</PageTitleCentered>
-					{[POOLS_MAJOR, POOLS_SECONDARY].map((pools, i) => {
+					{[POOLS_MAJOR].map((pools, i) => {
 						return (
 							<ButtonRow key={`pool-${i}`}>
 								{pools.map(({ title, name, image, contract }, i) => {
@@ -86,12 +98,7 @@ const LPRewards = ({ currentTheme }) => {
 													<StyledHeading>{t(title)}</StyledHeading>
 												</ButtonHeading>
 												<StyledSubtext>{t('lpRewards.shared.info.weeklyRewards')}:</StyledSubtext>
-												{name === 'curvepoolSBTC' ? (
-													<DistributionRow>
-														<StyledDataLarge>10,000 SNX</StyledDataLarge>
-														<StyledDataLarge>25,000 REN</StyledDataLarge>
-													</DistributionRow>
-												) : ['unipoolPLR', 'unipoolSXAU', 'balancerSNX'].includes(name) ? (
+												{distribution !== 0 ? (
 													<StyledDataLarge>{formatCurrency(distribution, 0)} PLR</StyledDataLarge>
 												) : (
 													<CompletedLabel>
@@ -185,14 +192,6 @@ const StyledHeading = styled(H1)`
 const StyledDataLarge = styled(DataLarge)`
 	color: ${props => props.theme.colorStyles.panels};
 	font-size: 16px;
-`;
-
-const DistributionRow = styled.div`
-	display: flex;
-	flex-direction: column;
-	& > :not(:first-child) {
-		margin-top: 10px;
-	}
 `;
 
 const StyledSubtext = styled(Subtext)`

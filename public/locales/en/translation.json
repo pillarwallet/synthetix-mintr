@@ -338,11 +338,13 @@
 		"actions": {
 			"unipoolPLR": {
 				"title": "Uniswap v2 ETH-PLR"
+			},
+			"balancerMTAUSDC": {
+				"title": "Balancer mUSD/USDC 50/50"
 			}
 		},
 		"shared": {
 			"unlocked": {
-				"link": "See blog post",
 				"complete": "Transaction in progress!"
 			},
 			"data": {
@@ -380,6 +382,16 @@
 		},
 		"unlocked": {
 			"subtitle": "Here you can stake your UNI-V2 Liquidity Provider (LP) tokens, claim PLR rewards, or exit completely."
+		}
+	},
+	"balancerMTAUSDC": {
+		"title": "Balancer MUSD-USDC LP Token Rewards",
+		"locked": {
+			"subtitle": "First approve the BalPool contract to transfer your MUSD-USDC BPT tokens for staking.",
+			"transaction": "Setting BTP LP token allowance"
+		},
+		"unlocked": {
+			"subtitle": "Here you can stake your Balancer Liquidity Provider (LP) tokens, claim PLR rewards, or exit completely."
 		}
 	},
 	"delegation": {
