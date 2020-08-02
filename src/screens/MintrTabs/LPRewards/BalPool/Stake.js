@@ -34,9 +34,11 @@ const TRANSACTION_DETAILS = {
 	},
 };
 
-const Stake = ({ walletDetails, goBack }) => {
+const Stake = ({ walletDetails, goBack, stakeContract }) => {
 	const { t } = useTranslation();
-	const { unipoolPLRContract } = snxJSConnector;
+
+	const balpoolContract = snxJSConnector[stakeContract];
+
 	const [balances, setBalances] = useState(null);
 	const [gasLimit, setGasLimit] = useState(TRANSACTION_DETAILS.stake.gasLimit);
 	const [currentScenario, setCurrentScenario] = useState({});
@@ -44,12 +46,14 @@ const Stake = ({ walletDetails, goBack }) => {
 
 	const fetchData = useCallback(async () => {
 		if (!snxJSConnector.initialized) return;
+	
+		const pool = snxJSConnector.getBalancerPoolContract(await balpoolContract.uni());
+
 		try {
-			const { uniswapV2Contract, unipoolPLRContract } = snxJSConnector;
 			const [univ1Held, univ1Staked, rewards] = await Promise.all([
-				uniswapV2Contract.balanceOf(currentWallet),
-				unipoolPLRContract.balanceOf(currentWallet),
-				unipoolPLRContract.earned(currentWallet),
+				pool.balanceOf(currentWallet),
+				balpoolContract.balanceOf(currentWallet),
+				balpoolContract.earned(currentWallet),
 			]);
 			setBalances({
 				univ1Held: bigNumberFormatter(univ1Held),
@@ -70,21 +74,22 @@ const Stake = ({ walletDetails, goBack }) => {
 
 	useEffect(() => {
 		if (!currentWallet) return;
-		const { unipoolPLRContract } = snxJSConnector;
 
-		unipoolPLRContract.on('Staked', user => {
+		const balpoolContract = snxJSConnector[stakeContract];
+
+		balpoolContract.on('Staked', user => {
 			if (user === currentWallet) {
 				fetchData();
 			}
 		});
 
-		unipoolPLRContract.on('Withdrawn', user => {
+		balpoolContract.on('Withdrawn', user => {
 			if (user === currentWallet) {
 				fetchData();
 			}
 		});
 
-		unipoolPLRContract.on('RewardPaid', user => {
+		balpoolContract.on('RewardPaid', user => {
 			if (user === currentWallet) {
 				fetchData();
 			}
@@ -92,9 +97,9 @@ const Stake = ({ walletDetails, goBack }) => {
 
 		return () => {
 			if (snxJSConnector.initialized) {
-				unipoolPLRContract.removeAllListeners('Staked');
-				unipoolPLRContract.removeAllListeners('Withdrawn');
-				unipoolPLRContract.removeAllListeners('RewardPaid');
+				balpoolContract.removeAllListeners('Staked');
+				balpoolContract.removeAllListeners('Withdrawn');
+				balpoolContract.removeAllListeners('RewardPaid');
 			}
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -108,21 +113,21 @@ const Stake = ({ walletDetails, goBack }) => {
 				<ButtonTertiary
 					as="a"
 					target="_blank"
-					href={`https://etherscan.io/address/${unipoolPLRContract.address}`}
+					href={`https://etherscan.io/address/${balpoolContract.address}`}
 				>
 					{t('lpRewards.shared.buttons.goToContract')} ↗
 				</ButtonTertiary>
 			</Navigation>
-			<PageTitle>{t('unipoolPLR.title')}</PageTitle>
-			<PLarge>{t('unipoolPLR.unlocked.subtitle')}</PLarge>
+			<PageTitle>{t('balancerMTAUSDC.title')}</PageTitle>
+			<PLarge>{t('balancerMTAUSDC.unlocked.subtitle')}</PLarge>
 			<BoxRow>
 				<DataBox
 					heading={t('lpRewards.shared.data.balance')}
-					body={`${balances ? formatCurrency(balances.univ1Held) : 0} UNI-V2`}
+					body={`${balances ? formatCurrency(balances.univ1Held) : 0} BPT`}
 				/>
 				<DataBox
 					heading={t('lpRewards.shared.data.staked')}
-					body={`${balances ? formatCurrency(balances.univ1Staked) : 0} UNI-V2`}
+					body={`${balances ? formatCurrency(balances.univ1Staked) : 0} BPT`}
 				/>
 				<DataBox
 					heading={t('lpRewards.shared.data.rewardsAvailable')}
@@ -136,7 +141,7 @@ const Stake = ({ walletDetails, goBack }) => {
 						disabled={!balances}
 						onClick={() =>
 							setCurrentScenario({
-								contract: 'unipoolPLRContract',
+								contract: stakeContract,
 								action: 'stake',
 								label: t('lpRewards.shared.actions.staking'),
 								amount: `${balances && formatCurrency(balances.univ1Held)} UNI-V2`,
@@ -152,7 +157,7 @@ const Stake = ({ walletDetails, goBack }) => {
 						disabled={!balances || !balances.rewards}
 						onClick={() =>
 							setCurrentScenario({
-								contract: 'unipoolPLRContract',
+								contract: stakeContract,
 								action: 'claim',
 								label: t('lpRewards.shared.actions.claiming'),
 								amount: `${balances && formatCurrency(balances.rewards)} PLR`,
@@ -169,7 +174,7 @@ const Stake = ({ walletDetails, goBack }) => {
 						disabled={!balances || !balances.univ1Staked}
 						onClick={() =>
 							setCurrentScenario({
-								contract: 'unipoolPLRContract',
+								contract: stakeContract,
 								action: 'unstake',
 								label: t('lpRewards.shared.actions.unstaking'),
 								amount: `${balances && formatCurrency(balances.univ1Staked)} UNI-V2`,
@@ -185,7 +190,7 @@ const Stake = ({ walletDetails, goBack }) => {
 						disabled={!balances || (!balances.univ1Staked && !balances.rewards)}
 						onClick={() =>
 							setCurrentScenario({
-								contract: 'unipoolPLRContract',
+								contract: stakeContract,
 								action: 'exit',
 								label: t('lpRewards.shared.actions.exiting'),
 								amount: `${balances && formatCurrency(balances.univ1Staked)} UNI-V2 & ${

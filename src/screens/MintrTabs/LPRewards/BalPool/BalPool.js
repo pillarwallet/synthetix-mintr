@@ -72,9 +72,9 @@ const UniPool = ({ goBack, walletDetails, stakeContract }) => {
 					<Spinner />
 				</SpinnerContainer>
 			) : !hasAllowance ? (
-				<SetAllowance goBack={goBack} />
+				<SetAllowance stakeContract={stakeContract} goBack={goBack} />
 			) : (
-				<Stake goBack={goBack} />
+				<Stake stakeContract={stakeContract} goBack={goBack} />
 			)}
 		</PageContainer>
 	);

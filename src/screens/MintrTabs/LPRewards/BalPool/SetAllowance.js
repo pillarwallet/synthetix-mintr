@@ -13,7 +13,7 @@ import snxJSConnector from '../../../../helpers/snxJSConnector';
 import { PageTitle, PLarge } from '../../../../components/Typography';
 import { ButtonPrimary, ButtonTertiary } from '../../../../components/Button';
 
-const SetAllowance = ({ createTransaction, goBack, currentGasPrice }) => {
+const SetAllowance = ({ createTransaction, goBack, currentGasPrice, stakeContract }) => {
 	const { t } = useTranslation();
 	const [error, setError] = useState(null);
 
@@ -42,7 +42,7 @@ const SetAllowance = ({ createTransaction, goBack, currentGasPrice }) => {
 				createTransaction({
 					hash: transaction.hash,
 					status: 'pending',
-					info: t('unipoolPLR.locked.transaction'),
+					info: t('balancerMTAUSDC.locked.transaction'),
 					hasNotification: true,
 				});
 			}
@@ -58,8 +58,8 @@ const SetAllowance = ({ createTransaction, goBack, currentGasPrice }) => {
 			</Navigation>
 			<TitleContainer>
 				<Logo src="/images/ethplruni-color.svg" />
-				<PageTitle>{t('unipoolPLR.title')}</PageTitle>
-				<PLarge>{t('unipoolPLR.locked.subtitle')}</PLarge>
+				<PageTitle>{t('balancerMTAUSDC.title')}</PageTitle>
+				<PLarge>{t('balancerMTAUSDC.locked.subtitle')}</PLarge>
 			</TitleContainer>
 			<ButtonRow>
 				<ButtonPrimary onClick={onUnlock}>{t('lpRewards.shared.buttons.unlock')}</ButtonPrimary>
