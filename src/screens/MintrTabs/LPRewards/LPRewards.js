@@ -137,7 +137,7 @@ const PageTitleCentered = styled(PageTitle)`
 const CompletedLabel = styled(FlexDivCentered)`
 	justify-content: center;
 	border-radius: 1000px;
-	background-color: ${props => props.theme.colorStyles.borders};
+	background-color: ${props => props.theme.colorStyles.background};
 	padding: 4px 15px;
 `;
 
@@ -149,25 +149,31 @@ const CompletedLabelHeading = styled(PMedium)`
 
 const Button = styled.button`
 	cursor: pointer;
-	height: 350px;
+	height: 348px;
 	background-color: ${props => props.theme.colorStyles.panelButton};
 	border: 1px solid ${props => props.theme.colorStyles.borders};
 	border-radius: 5px;
 	box-shadow: 0px 5px 10px 5px ${props => props.theme.colorStyles.shadow1};
 	transition: transform ease-in 0.2s;
-	width: 33%;
+	width: 222px;
 	&:hover {
 		transform: translateY(-2px);
 	}
+	margin-left: 20px;
+	margin-right: 20px;
 `;
 
 const ButtonContainer = styled.div`
 	padding: 10px;
-	margin: 0 auto;
+	margin: 0 5px;
+	height: 300px;
+	display: flex;
+	flex-direction: column;
 `;
 
 const ButtonHeading = styled.div`
 	height: 128px;
+	margin-bottom: 30px;
 `;
 
 const ButtonRow = styled.div`
