@@ -46,22 +46,25 @@ const UniPool = ({ goBack, walletDetails, stakeContract }) => {
 	}, [fetchAllowance]);
 
 	useEffect(async () => {
-		if (!currentWallet) return;
+		async function setupListeners() {
+			if (!currentWallet) return;
 
-		const balpoolContract = snxJSConnector[stakeContract];
-		const pool = snxJSConnector.getBalancerPoolContract(await balpoolContract.uni());
+			const balpoolContract = snxJSConnector[stakeContract];
+			const pool = snxJSConnector.getBalancerPoolContract(await balpoolContract.uni());
 
-		pool.on('Approval', (owner, spender) => {
-			if (owner === currentWallet && spender === balpoolContract.address) {
-				setAllowance(true);
-			}
-		});
+			pool.on('Approval', (owner, spender) => {
+				if (owner === currentWallet && spender === balpoolContract.address) {
+					setAllowance(true);
+				}
+			});
 
-		return () => {
-			if (snxJSConnector.initialized) {
-				pool.removeAllListeners('Approval');
-			}
-		};
+			return () => {
+				if (snxJSConnector.initialized) {
+					pool.removeAllListeners('Approval');
+				}
+			};
+		}
+		setupListeners();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentWallet]);
 
