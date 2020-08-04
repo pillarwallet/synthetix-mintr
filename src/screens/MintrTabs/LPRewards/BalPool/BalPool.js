@@ -26,10 +26,7 @@ const UniPool = ({ goBack, walletDetails, stakeContract }) => {
 
 		try {
 			setIsLoading(true);
-			const allowance = await pool.allowance(
-				currentWallet,
-				balpoolContract.address
-			);
+			const allowance = await pool.allowance(currentWallet, balpoolContract.address);
 			setAllowance(!!bigNumberFormatter(allowance));
 			setIsLoading(false);
 		} catch (e) {
@@ -45,7 +42,7 @@ const UniPool = ({ goBack, walletDetails, stakeContract }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [fetchAllowance]);
 
-	useEffect(async () => {
+	useEffect(() => {
 		async function setupListeners() {
 			if (!currentWallet) return;
 
