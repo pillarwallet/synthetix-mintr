@@ -22,7 +22,7 @@ let snxJSConnector = {
 
 		if (this.signer) {
 			this.uniswapV2Contract = new ethers.Contract(uniswapV2.address, uniswapV2.abi, this.signer);
-			this.balancerMTAUSDCContract = new ethers.Contract('0x399c1F06b16034c625bAa7996C4D38D72aec9681', balpool.abi, this.signer);
+			this.balancerMTAUSDCContract = new ethers.Contract('0x75795215cF448Dddf1391977a264d4a61a88A8AC', balpool.abi, this.signer);
 			this.unipoolPLRContract = new ethers.Contract(
 				unipoolPLR.address,
 				unipoolPLR.abi,

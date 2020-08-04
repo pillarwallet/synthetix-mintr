@@ -46,14 +46,15 @@ const Stake = ({ walletDetails, goBack, stakeContract }) => {
 
 	const fetchData = useCallback(async () => {
 		if (!snxJSConnector.initialized) return;
-	
+
 		const pool = snxJSConnector.getBalancerPoolContract(await balpoolContract.uni());
 
 		try {
-			const [univ1Held, univ1Staked, rewards] = await Promise.all([
+			const [univ1Held, univ1Staked, rewards, eligible] = await Promise.all([
 				pool.balanceOf(currentWallet),
 				balpoolContract.balanceOf(currentWallet),
 				balpoolContract.earned(currentWallet),
+				balpoolContract.isEligible(currentWallet),
 			]);
 			setBalances({
 				univ1Held: bigNumberFormatter(univ1Held),
@@ -61,6 +62,7 @@ const Stake = ({ walletDetails, goBack, stakeContract }) => {
 				univ1Staked: bigNumberFormatter(univ1Staked),
 				univ1StakedBN: univ1Staked,
 				rewards: bigNumberFormatter(rewards),
+				eligible: eligible,
 			});
 		} catch (e) {
 			console.log(e);
@@ -120,6 +122,7 @@ const Stake = ({ walletDetails, goBack, stakeContract }) => {
 			</Navigation>
 			<PageTitle>{t('balancerMTAUSDC.title')}</PageTitle>
 			<PLarge>{t('balancerMTAUSDC.unlocked.subtitle')}</PLarge>
+			<PLarge>{balances && balances.eligible ? "Yes" : "No"}</PLarge>
 			<BoxRow>
 				<DataBox
 					heading={t('lpRewards.shared.data.balance')}
@@ -138,7 +141,7 @@ const Stake = ({ walletDetails, goBack, stakeContract }) => {
 				<ButtonRow>
 					<ButtonAction
 						onMouseEnter={() => setGasLimit(TRANSACTION_DETAILS['stake'].gasLimit)}
-						disabled={!balances}
+						disabled={!balances || !balances.univ1Held}
 						onClick={() =>
 							setCurrentScenario({
 								contract: stakeContract,
