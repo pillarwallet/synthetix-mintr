@@ -13,20 +13,20 @@ import Spinner from '../../../../components/Spinner';
 import SetAllowance from './SetAllowance';
 import Stake from './Stake';
 
-const UniPool = ({ goBack, walletDetails, stakeContract }) => {
+const UniPool = ({ goBack, walletDetails }) => {
 	const [hasAllowance, setAllowance] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const { currentWallet } = walletDetails;
 
 	const fetchAllowance = useCallback(async () => {
 		if (!snxJSConnector.initialized) return;
-
-		const balpoolContract = snxJSConnector[stakeContract];
-		const pool = snxJSConnector.getBalancerPoolContract(await balpoolContract.uni());
-
+		const { uniswapV2Contract, unipoolPLRContract } = snxJSConnector;
 		try {
 			setIsLoading(true);
-			const allowance = await pool.allowance(currentWallet, balpoolContract.address);
+			const allowance = await uniswapV2Contract.allowance(
+				currentWallet,
+				unipoolPLRContract.address
+			);
 			setAllowance(!!bigNumberFormatter(allowance));
 			setIsLoading(false);
 		} catch (e) {
@@ -43,25 +43,20 @@ const UniPool = ({ goBack, walletDetails, stakeContract }) => {
 	}, [fetchAllowance]);
 
 	useEffect(() => {
-		async function setupListeners() {
-			if (!currentWallet) return;
+		if (!currentWallet) return;
+		const { uniswapV2Contract, unipoolPLRContract } = snxJSConnector;
 
-			const balpoolContract = snxJSConnector[stakeContract];
-			const pool = snxJSConnector.getBalancerPoolContract(await balpoolContract.uni());
+		uniswapV2Contract.on('Approval', (owner, spender) => {
+			if (owner === currentWallet && spender === unipoolPLRContract.address) {
+				setAllowance(true);
+			}
+		});
 
-			pool.on('Approval', (owner, spender) => {
-				if (owner === currentWallet && spender === balpoolContract.address) {
-					setAllowance(true);
-				}
-			});
-
-			return () => {
-				if (snxJSConnector.initialized) {
-					pool.removeAllListeners('Approval');
-				}
-			};
-		}
-		setupListeners();
+		return () => {
+			if (snxJSConnector.initialized) {
+				uniswapV2Contract.removeAllListeners('Approval');
+			}
+		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentWallet]);
 
@@ -72,9 +67,9 @@ const UniPool = ({ goBack, walletDetails, stakeContract }) => {
 					<Spinner />
 				</SpinnerContainer>
 			) : !hasAllowance ? (
-				<SetAllowance stakeContract={stakeContract} goBack={goBack} />
+				<SetAllowance goBack={goBack} />
 			) : (
-				<Stake stakeContract={stakeContract} goBack={goBack} />
+				<Stake goBack={goBack} />
 			)}
 		</PageContainer>
 	);

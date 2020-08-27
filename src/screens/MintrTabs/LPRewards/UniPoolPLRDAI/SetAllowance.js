@@ -13,25 +13,22 @@ import snxJSConnector from '../../../../helpers/snxJSConnector';
 import { PageTitle, PLarge } from '../../../../components/Typography';
 import { ButtonPrimary, ButtonTertiary } from '../../../../components/Button';
 
-const SetAllowance = ({ createTransaction, goBack, currentGasPrice, stakeContract }) => {
+const SetAllowance = ({ createTransaction, goBack, currentGasPrice }) => {
 	const { t } = useTranslation();
 	const [error, setError] = useState(null);
 
 	const onUnlock = async () => {
 		const { parseEther } = snxJSConnector.utils;
-
-		const balpoolContract = snxJSConnector[stakeContract];
-		const pool = snxJSConnector.getBalancerPoolContract(await balpoolContract.uni());
-
+		const { uniswapV2Contract, unipoolPLRContract } = snxJSConnector;
 		try {
 			setError(null);
 
-			const gasEstimate = await pool.estimate.approve(
-				balpoolContract.address,
+			const gasEstimate = await uniswapV2Contract.estimate.approve(
+				unipoolPLRContract.address,
 				parseEther(TOKEN_ALLOWANCE_LIMIT.toString())
 			);
-			const transaction = await pool.approve(
-				balpoolContract.address,
+			const transaction = await uniswapV2Contract.approve(
+				unipoolPLRContract.address,
 				parseEther(TOKEN_ALLOWANCE_LIMIT.toString()),
 				{
 					gasLimit: Number(gasEstimate) + 10000,
@@ -42,7 +39,7 @@ const SetAllowance = ({ createTransaction, goBack, currentGasPrice, stakeContrac
 				createTransaction({
 					hash: transaction.hash,
 					status: 'pending',
-					info: t('balancerMTAUSDC.locked.transaction'),
+					info: t('unipoolPLR.locked.transaction'),
 					hasNotification: true,
 				});
 			}
@@ -58,8 +55,8 @@ const SetAllowance = ({ createTransaction, goBack, currentGasPrice, stakeContrac
 			</Navigation>
 			<TitleContainer>
 				<Logo src="/images/ethplruni-color.svg" />
-				<PageTitle>{t('balancerMTAUSDC.title')}</PageTitle>
-				<PLarge>{t('balancerMTAUSDC.locked.subtitle')}</PLarge>
+				<PageTitle>{t('unipoolPLR.title')}</PageTitle>
+				<PLarge>{t('unipoolPLR.locked.subtitle')}</PLarge>
 			</TitleContainer>
 			<ButtonRow>
 				<ButtonPrimary onClick={onUnlock}>{t('lpRewards.shared.buttons.unlock')}</ButtonPrimary>

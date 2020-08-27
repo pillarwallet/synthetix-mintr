@@ -8,6 +8,9 @@ import {
 import { ethers } from 'ethers';
 import { uniswapV2, unipoolPLR, balpool } from './contracts';
 
+const uniswapPLRDAIAddress = '0x025d34acFD5c65cfd5A73209f99608c9E13338F3';
+const balpoolPLRDAIAddress = '0xc4095ec8f722E4C287B189240e2cBca0055d33Eb';
+
 let snxJSConnector = {
 	initialized: false,
 	signers: SynthetixJs.signers,
@@ -22,27 +25,23 @@ let snxJSConnector = {
 
 		if (this.signer) {
 			this.uniswapV2Contract = new ethers.Contract(uniswapV2.address, uniswapV2.abi, this.signer);
-			this.balancerMTAUSDCContract = new ethers.Contract('0x75795215cF448Dddf1391977a264d4a61a88A8AC', balpool.abi, this.signer);
+			this.uniswapV2PLRDAIContract = new ethers.Contract(
+				uniswapPLRDAIAddress,
+				uniswapV2.abi,
+				this.signer
+			);
 			this.unipoolPLRContract = new ethers.Contract(
 				unipoolPLR.address,
 				unipoolPLR.abi,
 				this.signer
 			);
+			this.unipoolPLRDAIContract = new ethers.Contract(
+				balpoolPLRDAIAddress,
+				balpool.abi,
+				this.signer
+			);
 		}
 	},
-	balancerPools: {},
-	getBalancerPoolContract: function (address) {
-		if (!this.signer)
-			return null;
-
-		if (address in this.balancerPools) {
-			return this.balancerPools[address];
-		}
-		console.log(address);
-		const contract = new ethers.Contract(address, uniswapV2.abi, this.signer);
-		this.balancerPools[address] = contract;
-		return contract;
-	}
 };
 
 const connectToMetamask = async (networkId, networkName) => {
