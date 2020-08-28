@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import UnipoolPLR from './UniPoolPLR';
-import BalPool from './BalPool';
+import UnipoolPLRDAI from './UniPoolPLRDAI';
 
 import { getCurrentTheme } from 'ducks/ui';
 
@@ -26,10 +26,10 @@ const POOLS_MAJOR = [
 		contract: 'unipoolPLRContract',
 	},
 	{
-		title: 'lpRewards.actions.balancerMTAUSDC.title',
-		name: 'balancerMTAUSDC',
+		title: 'lpRewards.actions.balpoolPLRDAI.title',
+		name: 'balpoolPLRDAI',
 		image: '/images/ethplruni-color.svg',
-		contract: 'balancerMTAUSDCContract',
+		contract: 'unipoolPLRDAIContract',
 	},
 ];
 
@@ -40,11 +40,11 @@ const LPRewards = ({ currentTheme }) => {
 	const goBack = () => setCurrentPool(null);
 
 	useEffect(() => {
-		const { unipoolPLRContract, balancerMTAUSDCContract } = snxJSConnector;
+		const { unipoolPLRContract, unipoolPLRDAIContract } = snxJSConnector;
 
 		const getRewardsAmount = async () => {
 			try {
-				const contracts = [unipoolPLRContract, balancerMTAUSDCContract];
+				const contracts = [unipoolPLRContract, unipoolPLRDAIContract];
 				const rewardsData = await Promise.all(
 					contracts.map(contract => Promise.all([contract.DURATION(), contract.rewardRate()]))
 				);
@@ -66,13 +66,8 @@ const LPRewards = ({ currentTheme }) => {
 		switch (poolName) {
 			case 'unipoolPLR':
 				return <UnipoolPLR goBack={goBack} />;
-			case 'balancerMTAUSDC':
-				return (
-					<BalPool
-						stakeContract="balancerMTAUSDCContract"
-						goBack={goBack}
-					/>
-				);
+			case 'balpoolPLRDAI':
+				return <UnipoolPLRDAI goBack={goBack} />;
 			default:
 				return null;
 		}

@@ -20,12 +20,12 @@ const UniPool = ({ goBack, walletDetails }) => {
 
 	const fetchAllowance = useCallback(async () => {
 		if (!snxJSConnector.initialized) return;
-		const { uniswapV2Contract, unipoolPLRContract } = snxJSConnector;
+		const { uniswapV2PLRDAIContract, unipoolPLRDAIContract } = snxJSConnector;
 		try {
 			setIsLoading(true);
-			const allowance = await uniswapV2Contract.allowance(
+			const allowance = await uniswapV2PLRDAIContract.allowance(
 				currentWallet,
-				unipoolPLRContract.address
+				unipoolPLRDAIContract.address
 			);
 			setAllowance(!!bigNumberFormatter(allowance));
 			setIsLoading(false);
