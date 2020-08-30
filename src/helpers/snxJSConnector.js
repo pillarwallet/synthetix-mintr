@@ -9,7 +9,7 @@ import { ethers } from 'ethers';
 import { uniswapV2, unipoolPLR, balpool } from './contracts';
 
 const uniswapPLRDAIAddress = '0x025d34acFD5c65cfd5A73209f99608c9E13338F3';
-const balpoolPLRDAIAddress = '0xc4095ec8f722E4C287B189240e2cBca0055d33Eb';
+const balpoolPLRDAIAddress = '0x71B4A17E4254F85420B06bC55f431A5EEb97E7fB';
 
 let snxJSConnector = {
 	initialized: false,
