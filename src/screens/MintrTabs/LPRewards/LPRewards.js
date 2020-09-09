@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-import UnipoolSETH from './UniPoolSETH';
+import UnipoolPLR from './UniPoolPLR';
+import UnipoolPLRDAI from './UniPoolPLRDAI';
 
 import { getCurrentTheme } from 'ducks/ui';
 
@@ -19,14 +20,18 @@ import { formatCurrency } from 'helpers/formatters';
 
 const POOLS_MAJOR = [
 	{
-		title: 'lpRewards.actions.unipoolSETH.title',
-		name: 'unipoolSETH',
+		title: 'lpRewards.actions.unipoolPLR.title',
+		name: 'unipoolPLR',
 		image: '/images/ethplruni-color.svg',
-		contract: 'unipoolSETHContract',
+		contract: 'unipoolPLRContract',
+	},
+	{
+		title: 'lpRewards.actions.balpoolPLRDAI.title',
+		name: 'balpoolPLRDAI',
+		image: '/images/ethplruni-color.svg',
+		contract: 'unipoolPLRDAIContract',
 	},
 ];
-
-const POOLS_SECONDARY = [];
 
 const LPRewards = ({ currentTheme }) => {
 	const { t } = useTranslation();
@@ -35,11 +40,11 @@ const LPRewards = ({ currentTheme }) => {
 	const goBack = () => setCurrentPool(null);
 
 	useEffect(() => {
-		const { unipoolSETHContract } = snxJSConnector;
+		const { unipoolPLRContract, unipoolPLRDAIContract } = snxJSConnector;
 
 		const getRewardsAmount = async () => {
 			try {
-				const contracts = [unipoolSETHContract];
+				const contracts = [unipoolPLRContract, unipoolPLRDAIContract];
 				const rewardsData = await Promise.all(
 					contracts.map(contract => Promise.all([contract.DURATION(), contract.rewardRate()]))
 				);
@@ -59,8 +64,10 @@ const LPRewards = ({ currentTheme }) => {
 
 	const getPoolComponent = poolName => {
 		switch (poolName) {
-			case 'unipoolSETH':
-				return <UnipoolSETH goBack={goBack} />;
+			case 'unipoolPLR':
+				return <UnipoolPLR goBack={goBack} />;
+			case 'balpoolPLRDAI':
+				return <UnipoolPLRDAI goBack={goBack} />;
 			default:
 				return null;
 		}
@@ -73,7 +80,7 @@ const LPRewards = ({ currentTheme }) => {
 			) : (
 				<>
 					<PageTitleCentered>{t('lpRewards.intro.title')}</PageTitleCentered>
-					{[POOLS_MAJOR, POOLS_SECONDARY].map((pools, i) => {
+					{[POOLS_MAJOR].map((pools, i) => {
 						return (
 							<ButtonRow key={`pool-${i}`}>
 								{pools.map(({ title, name, image, contract }, i) => {
@@ -86,12 +93,7 @@ const LPRewards = ({ currentTheme }) => {
 													<StyledHeading>{t(title)}</StyledHeading>
 												</ButtonHeading>
 												<StyledSubtext>{t('lpRewards.shared.info.weeklyRewards')}:</StyledSubtext>
-												{name === 'curvepoolSBTC' ? (
-													<DistributionRow>
-														<StyledDataLarge>10,000 SNX</StyledDataLarge>
-														<StyledDataLarge>25,000 REN</StyledDataLarge>
-													</DistributionRow>
-												) : ['unipoolSETH', 'unipoolSXAU', 'balancerSNX'].includes(name) ? (
+												{distribution !== 0 ? (
 													<StyledDataLarge>{formatCurrency(distribution, 0)} PLR</StyledDataLarge>
 												) : (
 													<CompletedLabel>
@@ -130,7 +132,7 @@ const PageTitleCentered = styled(PageTitle)`
 const CompletedLabel = styled(FlexDivCentered)`
 	justify-content: center;
 	border-radius: 1000px;
-	background-color: ${props => props.theme.colorStyles.borders};
+	background-color: ${props => props.theme.colorStyles.background};
 	padding: 4px 15px;
 `;
 
@@ -142,25 +144,31 @@ const CompletedLabelHeading = styled(PMedium)`
 
 const Button = styled.button`
 	cursor: pointer;
-	height: 350px;
+	height: 348px;
 	background-color: ${props => props.theme.colorStyles.panelButton};
 	border: 1px solid ${props => props.theme.colorStyles.borders};
 	border-radius: 5px;
 	box-shadow: 0px 5px 10px 5px ${props => props.theme.colorStyles.shadow1};
 	transition: transform ease-in 0.2s;
-	width: 33%;
+	width: 222px;
 	&:hover {
 		transform: translateY(-2px);
 	}
+	margin-left: 20px;
+	margin-right: 20px;
 `;
 
 const ButtonContainer = styled.div`
 	padding: 10px;
-	margin: 0 auto;
+	margin: 0 5px;
+	height: 300px;
+	display: flex;
+	flex-direction: column;
 `;
 
 const ButtonHeading = styled.div`
 	height: 128px;
+	margin-bottom: 30px;
 `;
 
 const ButtonRow = styled.div`
@@ -185,14 +193,6 @@ const StyledHeading = styled(H1)`
 const StyledDataLarge = styled(DataLarge)`
 	color: ${props => props.theme.colorStyles.panels};
 	font-size: 16px;
-`;
-
-const DistributionRow = styled.div`
-	display: flex;
-	flex-direction: column;
-	& > :not(:first-child) {
-		margin-top: 10px;
-	}
 `;
 
 const StyledSubtext = styled(Subtext)`

@@ -5,7 +5,7 @@ import COLORS from 'styles/colors';
 
 const commonStyle = {
 	fontSize: 14,
-	fontFamily: 'apercu-regular',
+	fontFamily: 'archia-medium',
 	borderRadius: '5px',
 	padding: '15px',
 };
@@ -22,9 +22,9 @@ const LightTooltip = withStyles(() => ({
 const DarkTooltip = withStyles(() => ({
 	tooltip: {
 		...commonStyle,
-		backgroundColor: COLORS.dark2,
+		backgroundColor: COLORS.white,
 		border: `1px solid ${COLORS.dark4}`,
-		color: COLORS.dark6,
+		color: COLORS.purple,
 	},
 }))(Tooltip);
 

@@ -6,7 +6,10 @@ import {
 	PORTIS_APP_ID,
 } from './networkHelper';
 import { ethers } from 'ethers';
-import { uniswapV2, unipoolSETH } from './contracts';
+import { uniswapV2, unipoolPLR, balpool } from './contracts';
+
+const uniswapPLRDAIAddress = '0x025d34acFD5c65cfd5A73209f99608c9E13338F3';
+const balpoolPLRDAIAddress = '0x71B4A17E4254F85420B06bC55f431A5EEb97E7fB';
 
 let snxJSConnector = {
 	initialized: false,
@@ -22,9 +25,19 @@ let snxJSConnector = {
 
 		if (this.signer) {
 			this.uniswapV2Contract = new ethers.Contract(uniswapV2.address, uniswapV2.abi, this.signer);
-			this.unipoolSETHContract = new ethers.Contract(
-				unipoolSETH.address,
-				unipoolSETH.abi,
+			this.uniswapV2PLRDAIContract = new ethers.Contract(
+				uniswapPLRDAIAddress,
+				uniswapV2.abi,
+				this.signer
+			);
+			this.unipoolPLRContract = new ethers.Contract(
+				unipoolPLR.address,
+				unipoolPLR.abi,
+				this.signer
+			);
+			this.unipoolPLRDAIContract = new ethers.Contract(
+				balpoolPLRDAIAddress,
+				balpool.abi,
 				this.signer
 			);
 		}

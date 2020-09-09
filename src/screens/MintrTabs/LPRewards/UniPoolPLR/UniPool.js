@@ -20,12 +20,12 @@ const UniPool = ({ goBack, walletDetails }) => {
 
 	const fetchAllowance = useCallback(async () => {
 		if (!snxJSConnector.initialized) return;
-		const { uniswapV2Contract, unipoolSETHContract } = snxJSConnector;
+		const { uniswapV2Contract, unipoolPLRContract } = snxJSConnector;
 		try {
 			setIsLoading(true);
 			const allowance = await uniswapV2Contract.allowance(
 				currentWallet,
-				unipoolSETHContract.address
+				unipoolPLRContract.address
 			);
 			setAllowance(!!bigNumberFormatter(allowance));
 			setIsLoading(false);
@@ -44,10 +44,10 @@ const UniPool = ({ goBack, walletDetails }) => {
 
 	useEffect(() => {
 		if (!currentWallet) return;
-		const { uniswapV2Contract, unipoolSETHContract } = snxJSConnector;
+		const { uniswapV2Contract, unipoolPLRContract } = snxJSConnector;
 
 		uniswapV2Contract.on('Approval', (owner, spender) => {
-			if (owner === currentWallet && spender === unipoolSETHContract.address) {
+			if (owner === currentWallet && spender === unipoolPLRContract.address) {
 				setAllowance(true);
 			}
 		});

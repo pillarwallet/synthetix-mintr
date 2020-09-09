@@ -336,13 +336,15 @@
 			"completed": "Completed"
 		},
 		"actions": {
-			"unipoolSETH": {
+			"unipoolPLR": {
 				"title": "Uniswap v2 ETH-PLR"
+			},
+			"balpoolPLRDAI": {
+				"title": "Uniswap v2 PLR-DAI"
 			}
 		},
 		"shared": {
 			"unlocked": {
-				"link": "See blog post",
 				"complete": "Transaction in progress!"
 			},
 			"data": {
@@ -372,10 +374,20 @@
 			}
 		}
 	},
-	"unipoolSETH": {
+	"unipoolPLR": {
 		"title": "Uniswap ETH-PLR LP Token Rewards",
 		"locked": {
 			"subtitle": "First approve the Unipool contract to transfer your ETH-PLR UNI-V2 tokens for staking.",
+			"transaction": "Setting Uni-V2 LP token allowance"
+		},
+		"unlocked": {
+			"subtitle": "Here you can stake your UNI-V2 Liquidity Provider (LP) tokens, claim PLR rewards, or exit completely."
+		}
+	},
+	"balpoolPLRDAI": {
+		"title": "Uniswap PLR-DAI LP Token Rewards",
+		"locked": {
+			"subtitle": "First approve the Unipool contract to transfer your PLR-DAI UNI-V2 tokens for staking.",
 			"transaction": "Setting Uni-V2 LP token allowance"
 		},
 		"unlocked": {
