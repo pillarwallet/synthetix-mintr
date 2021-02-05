@@ -68,12 +68,8 @@ export const getAppIsReady = (state: RootState) => getAppState(state).isReady;
 export const getAppIsOnMaintenance = (state: RootState) => !!getAppState(state).isSystemUpgrading;
 
 function* fetchSystemStatus() {
-	const {
-		// @ts-ignore
-		snxJS: { SystemStatus },
-	} = snxJSConnector;
 	try {
-		const isSystemUpgrading = yield SystemStatus.isSystemUpgrading();
+		const isSystemUpgrading = false;
 		yield put(fetchAppStatusSuccess({ reason: isSystemUpgrading }));
 		return true;
 	} catch (e) {
