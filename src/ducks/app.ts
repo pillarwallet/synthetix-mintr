@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { takeLatest, put } from 'redux-saga/effects';
 
 import { RootState } from './types';
-import snxJSConnector from 'helpers/snxJSConnector';
+/*import snxJSConnector from 'helpers/snxJSConnector';*/
 
 export type AppSliceState = {
 	isReady: boolean;

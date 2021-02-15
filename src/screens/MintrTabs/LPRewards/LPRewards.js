@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import UnipoolPLR from './UniPoolPLR';
 import UnipoolPLRDAI from './UniPoolPLRDAI';
+import SushiPLR from './SushiPLR';
 
 import { getCurrentTheme } from 'ducks/ui';
 
@@ -30,6 +31,12 @@ const POOLS_MAJOR = [
 		name: 'balpoolPLRDAI',
 		image: '/images/ethplruni-color.svg',
 		contract: 'unipoolPLRDAIContract',
+	},
+	{
+		title: 'lpRewards.actions.sushiPLR.title',
+		name: 'sushiPLR',
+		image: '/images/ethplruni-color.svg',
+		contract: 'sushiPLRETHContract',
 	},
 ];
 
@@ -68,6 +75,8 @@ const LPRewards = ({ currentTheme }) => {
 				return <UnipoolPLR goBack={goBack} />;
 			case 'balpoolPLRDAI':
 				return <UnipoolPLRDAI goBack={goBack} />;
+			case 'sushiPLR':
+				return <SushiPLR goBack={goBack} />;
 			default:
 				return null;
 		}
