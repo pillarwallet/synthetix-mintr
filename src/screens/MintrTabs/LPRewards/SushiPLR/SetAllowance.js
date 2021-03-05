@@ -39,7 +39,7 @@ const SetAllowance = ({ createTransaction, goBack, currentGasPrice }) => {
 				createTransaction({
 					hash: transaction.hash,
 					status: 'pending',
-					info: t('unipoolPLR.locked.transaction'),
+					info: t('sushiPLR.locked.transaction'),
 					hasNotification: true,
 				});
 			}
@@ -55,8 +55,8 @@ const SetAllowance = ({ createTransaction, goBack, currentGasPrice }) => {
 			</Navigation>
 			<TitleContainer>
 				<Logo src="/images/ethplruni-color.svg" />
-				<PageTitle>{t('unipoolPLR.title')}</PageTitle>
-				<PLarge>{t('unipoolPLR.locked.subtitle')}</PLarge>
+				<PageTitle>{t('sushiPLR.title')}</PageTitle>
+				<PLarge>{t('sushiPLR.locked.subtitle')}</PLarge>
 			</TitleContainer>
 			<ButtonRow>
 				<ButtonPrimary onClick={onUnlock}>{t('lpRewards.shared.buttons.unlock')}</ButtonPrimary>

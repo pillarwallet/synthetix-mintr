@@ -113,8 +113,8 @@ const Stake = ({ walletDetails, goBack }) => {
 					{t('lpRewards.shared.buttons.goToContract')} ↗
 				</ButtonTertiary>
 			</Navigation>
-			<PageTitle>{t('unipoolPLR.title')}</PageTitle>
-			<PLarge>{t('unipoolPLR.unlocked.subtitle')}</PLarge>
+			<PageTitle>{t('sushiPLR.title')}</PageTitle>
+			<PLarge>{t('sushiPLR.unlocked.subtitle')}</PLarge>
 			<BoxRow>
 				<DataBox
 					heading={t('lpRewards.shared.data.balance')}
