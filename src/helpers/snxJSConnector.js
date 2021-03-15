@@ -11,6 +11,9 @@ import { uniswapV2, unipoolPLR, balpool } from './contracts';
 const uniswapPLRDAIAddress = '0x025d34acFD5c65cfd5A73209f99608c9E13338F3';
 const balpoolPLRDAIAddress = '0x71B4A17E4254F85420B06bC55f431A5EEb97E7fB';
 
+const sushiPLRETHaddress = '0x8fedca1b2aa38dd751bf4cb329d2a1fc5b26e8f2';
+const balpoolPLRETHsushi = '0x9D017377a15559Ee6BD5C5E795C92b6b99a657E1';
+
 let snxJSConnector = {
 	initialized: false,
 	signers: SynthetixJs.signers,
@@ -30,6 +33,7 @@ let snxJSConnector = {
 				uniswapV2.abi,
 				this.signer
 			);
+			this.sushiContract = new ethers.Contract(sushiPLRETHaddress, uniswapV2.abi, this.signer);
 			this.unipoolPLRContract = new ethers.Contract(
 				unipoolPLR.address,
 				unipoolPLR.abi,
@@ -40,6 +44,7 @@ let snxJSConnector = {
 				balpool.abi,
 				this.signer
 			);
+			this.sushiPLRETHContract = new ethers.Contract(balpoolPLRETHsushi, balpool.abi, this.signer);
 		}
 	},
 };

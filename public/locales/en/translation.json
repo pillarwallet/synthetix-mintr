@@ -339,6 +339,9 @@
 			"unipoolPLR": {
 				"title": "Uniswap v2 ETH-PLR"
 			},
+			"sushiPLR": {
+				"title": "Sushiswap v2 ETH-PLR"
+			},
 			"balpoolPLRDAI": {
 				"title": "Uniswap v2 PLR-DAI"
 			}
@@ -382,6 +385,16 @@
 		},
 		"unlocked": {
 			"subtitle": "Here you can stake your UNI-V2 Liquidity Provider (LP) tokens, claim PLR rewards, or exit completely."
+		}
+	},
+	"sushiPLR": {
+		"title": "Sushiswap ETH-PLR LP Token Rewards",
+		"locked": {
+			"subtitle": "First approve the Unipool contract to transfer your ETH-PLR SUSHI tokens for staking.",
+			"transaction": "Setting SUSHI LP token allowance"
+		},
+		"unlocked": {
+			"subtitle": "Here you can stake your SUSHI Liquidity Provider (LP) tokens, claim PLR rewards, or exit completely."
 		}
 	},
 	"balpoolPLRDAI": {
