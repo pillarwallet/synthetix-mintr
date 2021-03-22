@@ -47,11 +47,11 @@ const LPRewards = ({ currentTheme }) => {
 	const goBack = () => setCurrentPool(null);
 
 	useEffect(() => {
-		const { unipoolPLRContract, unipoolPLRDAIContract } = snxJSConnector;
+		const { unipoolPLRContract, unipoolPLRDAIContract, sushiPLRETHContract } = snxJSConnector;
 
 		const getRewardsAmount = async () => {
 			try {
-				const contracts = [unipoolPLRContract, unipoolPLRDAIContract];
+				const contracts = [unipoolPLRContract, unipoolPLRDAIContract, sushiPLRETHContract];
 				const rewardsData = await Promise.all(
 					contracts.map(contract => Promise.all([contract.DURATION(), contract.rewardRate()]))
 				);
