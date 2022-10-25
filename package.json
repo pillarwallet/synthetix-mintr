@@ -43,7 +43,7 @@
 		"styled-system": "^5.1.0",
 		"synthetix-data": "2.1.13",
 		"synthetix-js": "2.25.0",
-		"typescript": "3.7.5"
+		"typescript": "3.8.3"
 	},
 	"devDependencies": {
 		"@types/history": "^4.7.5",
@@ -65,6 +65,9 @@
 		"stylelint-config-recommended": "^3.0.0",
 		"stylelint-config-styled-components": "^0.1.1",
 		"stylelint-processor-styled-components": "^1.10.0"
+	},
+	"resolutions": {
+		"**/pretty-format": "25.2.1"
 	},
 	"scripts": {
 		"clean-install": "rm ./package-lock.json && rm -rf node_modules/* && npm i",
