@@ -67,7 +67,7 @@
 		"stylelint-processor-styled-components": "^1.10.0"
 	},
 	"resolutions": {
-		"**/pretty-format": "25.1.0"
+		"**/pretty-format": "25.2.1"
 	},
 	"scripts": {
 		"clean-install": "rm ./package-lock.json && rm -rf node_modules/* && npm i",
