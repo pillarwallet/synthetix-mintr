@@ -140,4 +140,4 @@ const GlobalEventsGate: FC<PropsFromRedux> = ({
 	return null;
 };
 
-export default connector(GlobalEventsGate);
+export default connector(GlobalEventsGate) as any;

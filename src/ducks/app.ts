@@ -71,7 +71,7 @@ function* fetchSystemStatus() {
 		const isSystemUpgrading = false;
 		yield put(fetchAppStatusSuccess({ reason: isSystemUpgrading }));
 		return true;
-	} catch (e) {
+	} catch (e: any) {
 		yield put(fetchAppStatusFailure({ error: e.message }));
 		return false;
 	}

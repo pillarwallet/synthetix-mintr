@@ -81,14 +81,14 @@ const getNetworkState = (state: RootState) => state[sliceName];
 export const getCurrentGasPrice = (state: RootState) => getNetworkState(state).currentGasPrice;
 export const getNetworkPrices = (state: RootState) => getNetworkState(state).networkSpeeds;
 
-function* fetchGasPrices() {
+function* fetchGasPrices(): any {
 	try {
 		const networkSpeeds = yield getNetworkSpeeds();
 		const avergageSpeed = networkSpeeds[NETWORK_SPEEDS_TO_KEY.AVERAGE];
 		const defaultSpeed = { ...avergageSpeed, formattedPrice: formatGasPrice(avergageSpeed.price) };
 		yield put(fetchGasPricesSuccess({ networkSpeeds, defaultSpeed }));
 		return true;
-	} catch (e) {
+	} catch (e: any) {
 		yield put(fetchGasPricesFailure({ error: e.message }));
 		return false;
 	}

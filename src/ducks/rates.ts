@@ -62,12 +62,12 @@ export const getSUSDRate = (state: RootState) =>
 	getRatesState(state).rates && getRatesState(state).rates![CRYPTO_CURRENCY_TO_KEY.sUSD];
 export const getRates = (state: RootState) => getRatesState(state).rates;
 
-function* fetchRates() {
+function* fetchRates(): any {
 	try {
 		const rates = yield getExchangeRates();
 		yield put(fetchRatesSuccess({ rates }));
 		return true;
-	} catch (e) {
+	} catch (e: any) {
 		yield put(fetchRatesFailure({ error: e.message }));
 		return false;
 	}
