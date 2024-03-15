@@ -5,7 +5,7 @@ import COLORS from 'styles/colors';
 
 const commonStyle = {
 	fontSize: 14,
-	fontFamily: 'archia-medium',
+	fontFamily: 'Archia-medium',
 	borderRadius: '5px',
 	padding: '15px',
 };

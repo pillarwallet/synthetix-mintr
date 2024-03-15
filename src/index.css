@@ -13,16 +13,16 @@ body {
 
 @font-face {
 	font-family: 'EuclidCircularB-Regular';
-	src: url('/fonts/EuclidCircularB-Regular.eot');
-	src: url('/fonts/EuclidCircularB-Regular.eot?#iefix') format('embedded-opentype'),
-		url('/fonts/EuclidCircularB-Regular.woff2') format('woff2'),
-		url('/fonts/EuclidCircularB-Regular.ttf') format('truetype');
+	src: url('assets/fonts/EuclidCircularB-Regular.eot');
+	src: url('assets/fonts/EuclidCircularB-Regular.eot?#iefix') format('embedded-opentype'),
+		url('assets/fonts/EuclidCircularB-Regular.woff2') format('woff2'),
+		url('assets/fonts/EuclidCircularB-Regular.ttf') format('truetype');
 }
 
 @font-face {
 	font-family: 'Archia-medium';
-	src: url('/fonts/archia-medium-webfont.eot');
-	src: url('/fonts/archia-medium-webtfont.eot?#iefix') format('embedded-opentype'),
-		url('/fonts/archia-medium-webfont.woff2') format('woff2'),
-		url('/fonts/archia-medium-webfont.ttf') format('truetype');
+	src: url('assets/fonts/archia-medium-webfont.eot');
+	src: url('assets/fonts/archia-medium-webfont.eot?#iefix') format('embedded-opentype'),
+		url('assets/fonts/archia-medium-webfont.woff2') format('woff2'),
+		url('assets/fonts/archia-medium-webfont.ttf') format('truetype');
 }

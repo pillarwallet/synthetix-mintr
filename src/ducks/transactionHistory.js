@@ -56,23 +56,16 @@ export const fetchTransactionHistory = walletAddress => async dispatch => {
 	dispatch(fetchTransactionHistoryRequest());
 
 	try {
-		const [
-			issued,
-			burned,
-			feesClaimed,
-			exchanges,
-			depotActions,
-			clearedDeposits,
-			depotExchanges,
-		] = await Promise.all([
-			snxData.snx.issued({ account: walletAddress }),
-			snxData.snx.burned({ account: walletAddress }),
-			snxData.snx.feesClaimed({ account: walletAddress }),
-			snxData.exchanges.since({ fromAddress: walletAddress, minTimestamp: 0, max: 100 }),
-			snxData.depot.userActions({ user: walletAddress }),
-			snxData.depot.clearedDeposits({ toAddress: walletAddress }),
-			snxData.depot.exchanges({ from: walletAddress }),
-		]);
+		const [issued, burned, feesClaimed, exchanges, depotActions, clearedDeposits, depotExchanges] =
+			await Promise.all([
+				snxData.snx.issued({ account: walletAddress }),
+				snxData.snx.burned({ account: walletAddress }),
+				snxData.snx.feesClaimed({ account: walletAddress }),
+				snxData.exchanges.since({ fromAddress: walletAddress, minTimestamp: 0, max: 100 }),
+				snxData.depot.userActions({ user: walletAddress }),
+				snxData.depot.clearedDeposits({ toAddress: walletAddress }),
+				snxData.depot.exchanges({ from: walletAddress }),
+			]);
 
 		const mergedArray = flatten(
 			[issued, burned, feesClaimed, exchanges, clearedDeposits, depotExchanges]

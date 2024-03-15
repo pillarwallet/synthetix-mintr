@@ -34,11 +34,8 @@ export const depotHistorySlice = createSlice({
 	},
 });
 
-const {
-	fetchDepotHistoryRequest,
-	fetchDepotHistoryFailure,
-	fetchDepotHistorySuccess,
-} = depotHistorySlice.actions;
+const { fetchDepotHistoryRequest, fetchDepotHistoryFailure, fetchDepotHistorySuccess } =
+	depotHistorySlice.actions;
 
 const getDepotHistoryState = state => state.depotHistory;
 export const getIsFetchingDepotHistory = state => getDepotHistoryState(state).isFetching;

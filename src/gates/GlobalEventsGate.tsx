@@ -46,69 +46,67 @@ const GlobalEventsGate: FC<PropsFromRedux> = ({
 		if (!currentWallet) return;
 		const {
 			//@ts-ignore
-			snxJS: { sUSD, FeePool, Synthetix, RewardEscrow, SynthetixEscrow },
+			snxJS: { SynthsUSD, FeePool, Synthetix, RewardEscrow, SynthetixEscrow },
 		} = snxJSConnector;
 
-		sUSD.contract.on(ISSUANCE_EVENTS.ISSUED, (account: string) => {
+		SynthsUSD.on(ISSUANCE_EVENTS.ISSUED, (account: string) => {
 			if (account === currentWallet) {
 				fetchDebtStatusRequest();
 				fetchBalancesRequest();
 			}
 		});
-		sUSD.contract.on(ISSUANCE_EVENTS.BURNED, (account: string) => {
+		SynthsUSD.on(ISSUANCE_EVENTS.BURNED, (account: string) => {
 			if (account === currentWallet) {
 				fetchDebtStatusRequest();
 				fetchBalancesRequest();
 			}
 		});
-		FeePool.contract.on(FEEPOOL_EVENTS.CLAIMED, (account: string) => {
+		FeePool.on(FEEPOOL_EVENTS.CLAIMED, (account: string) => {
 			if (account === currentWallet) {
 				fetchBalancesRequest();
 				fetchDebtStatusRequest();
 				fetchEscrowRequest();
 			}
 		});
-		Synthetix.contract.on(EXCHANGE_EVENTS.SYNTH_EXCHANGE, (address: string) => {
+		Synthetix.on(EXCHANGE_EVENTS.SYNTH_EXCHANGE, (address: string) => {
 			if (address === currentWallet) {
 				fetchBalancesRequest();
 				fetchDebtStatusRequest();
 			}
 		});
-		Synthetix.contract.on(TRANSFER_EVENTS.TRANSFER, (address: string) => {
+		Synthetix.on(TRANSFER_EVENTS.TRANSFER, (address: string) => {
 			if (address === currentWallet) {
 				fetchBalancesRequest();
 				fetchDebtStatusRequest();
 			}
 		});
-		sUSD.contract.on(TRANSFER_EVENTS.TRANSFER, (address: string) => {
+		SynthsUSD.on(TRANSFER_EVENTS.TRANSFER, (address: string) => {
 			if (address === currentWallet) {
 				fetchBalancesRequest();
 				fetchDebtStatusRequest();
 			}
 		});
-		SynthetixEscrow.contract.on(SYNTHETIX_ESCROW_EVENTS.VESTED, (address: string) => {
+		SynthetixEscrow.on(SYNTHETIX_ESCROW_EVENTS.VESTED, (address: string) => {
 			if (address === currentWallet) {
 				fetchEscrowRequest();
 			}
 		});
-		RewardEscrow.contract.on(REWARD_ESCROW_EVENTS.VESTED, (address: string) => {
+		RewardEscrow.on(REWARD_ESCROW_EVENTS.VESTED, (address: string) => {
 			if (address === currentWallet) {
 				fetchEscrowRequest();
 			}
 		});
 
 		return () => {
-			Object.values(ISSUANCE_EVENTS).forEach(event => sUSD.contract.removeAllListeners(event));
-			Object.values(FEEPOOL_EVENTS).forEach(event => FeePool.contract.removeAllListeners(event));
-			Object.values(EXCHANGE_EVENTS).forEach(event => Synthetix.contract.removeAllListeners(event));
-			Object.values(TRANSFER_EVENTS).forEach(event => Synthetix.contract.removeAllListeners(event));
-			Object.values(TRANSFER_EVENTS).forEach(event => sUSD.contract.removeAllListeners(event));
+			Object.values(ISSUANCE_EVENTS).forEach(event => SynthsUSD.removeAllListeners(event));
+			Object.values(FEEPOOL_EVENTS).forEach(event => FeePool.removeAllListeners(event));
+			Object.values(EXCHANGE_EVENTS).forEach(event => Synthetix.removeAllListeners(event));
+			Object.values(TRANSFER_EVENTS).forEach(event => Synthetix.removeAllListeners(event));
+			Object.values(TRANSFER_EVENTS).forEach(event => SynthsUSD.removeAllListeners(event));
 			Object.values(SYNTHETIX_ESCROW_EVENTS).forEach(event =>
-				SynthetixEscrow.contract.removeAllListeners(event)
+				SynthetixEscrow.removeAllListeners(event)
 			);
-			Object.values(REWARD_ESCROW_EVENTS).forEach(event =>
-				RewardEscrow.contract.removeAllListeners(event)
-			);
+			Object.values(REWARD_ESCROW_EVENTS).forEach(event => RewardEscrow.removeAllListeners(event));
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentWallet]);
@@ -118,21 +116,19 @@ const GlobalEventsGate: FC<PropsFromRedux> = ({
 			//@ts-ignore
 			snxJS: { SystemStatus, ExchangeRates },
 		} = snxJSConnector;
-		SystemStatus.contract.on(SYSTEM_STATUS_EVENTS.SYSTEM_SUSPENDED, (reason: number) => {
+		SystemStatus.on(SYSTEM_STATUS_EVENTS.SYSTEM_SUSPENDED, (reason: number) => {
 			setSystemUpgrading({ reason: true });
 		});
-		SystemStatus.contract.on(SYSTEM_STATUS_EVENTS.SYSTEM_RESUMED, () => {
+		SystemStatus.on(SYSTEM_STATUS_EVENTS.SYSTEM_RESUMED, () => {
 			setSystemUpgrading({ reason: false });
 		});
-		ExchangeRates.contract.on(EXCHANGE_RATES_EVENTS.RATES_UPDATED, () => {
+		ExchangeRates.on(EXCHANGE_RATES_EVENTS.RATES_UPDATED, () => {
 			fetchRatesRequest();
 		});
 		return () => {
-			Object.values(SYSTEM_STATUS_EVENTS).forEach(event =>
-				SystemStatus.contract.removeAllListeners(event)
-			);
+			Object.values(SYSTEM_STATUS_EVENTS).forEach(event => SystemStatus.removeAllListeners(event));
 			Object.values(EXCHANGE_RATES_EVENTS).forEach(event =>
-				ExchangeRates.contract.removeAllListeners(event)
+				ExchangeRates.removeAllListeners(event)
 			);
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps

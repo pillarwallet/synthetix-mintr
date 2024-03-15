@@ -1,5 +1,6 @@
 import React, { useEffect, FC } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
+import { useAccount } from 'wagmi';
 
 import { setAppReady, getAppIsReady, fetchAppStatusRequest } from 'ducks/app';
 import { fetchDebtStatusRequest } from 'ducks/debtStatus';
@@ -13,9 +14,9 @@ import { RootState } from 'ducks/types';
 import App from './App';
 
 import snxJSConnector from 'helpers/snxJSConnector';
-import { getEthereumNetwork } from 'helpers/networkHelper';
 import useInterval from 'hooks/useInterval';
 import { INTERVAL_TIMER } from 'constants/ui';
+import { useEthersSigner } from 'components/ethers';
 
 const mapStateToProps = (state: RootState) => ({
 	appIsReady: getAppIsReady(state),
@@ -73,10 +74,12 @@ const Root: FC<PropsFromRedux> = ({
 		}
 	}, INTERVAL_TIMER);
 
+	const { chainId } = useAccount();
+	const signer = useEthersSigner({ chainId });
+
 	useEffect(() => {
 		const init = async () => {
-			const { networkId } = await getEthereumNetwork();
-			snxJSConnector.setContractSettings({ networkId });
+			snxJSConnector.setContractSettings({ networkId: 1, signer });
 			setAppReady();
 		};
 		init();

@@ -44,12 +44,12 @@ export const getEscrowData = async (walletAddress: string) => {
 const fetchUniswapSETHRate = async () => {
 	const {
 		// @ts-ignore
-		snxJS: { sETH },
+		snxJS: { SynthsETH },
 	} = snxJSConnector;
 	const DEFAULT_RATE = 1;
 
 	try {
-		const sETHAddress = sETH.contract.address;
+		const sETHAddress = SynthsETH.contract.address;
 		const query = `query {
 			exchanges(where: {tokenAddress:"${sETHAddress}"}) {
 				price
@@ -111,20 +111,16 @@ export const getBalances = async (walletAddress: string) => {
 		// @ts-ignore
 		provider,
 	} = snxJSConnector;
-	const [
-		synthBalanceResults,
-		totalSynthsBalanceResults,
-		snxBalanceResults,
-		ethBalanceResults,
-	] = await Promise.all([
-		synthSummaryUtilContract.synthsBalances(walletAddress),
-		synthSummaryUtilContract.totalSynthsInKey(
-			walletAddress,
-			bytesFormatter(CRYPTO_CURRENCY_TO_KEY.sUSD)
-		),
-		Synthetix.collateral(walletAddress),
-		provider.getBalance(walletAddress),
-	]);
+	const [synthBalanceResults, totalSynthsBalanceResults, snxBalanceResults, ethBalanceResults] =
+		await Promise.all([
+			synthSummaryUtilContract.synthsBalances(walletAddress),
+			synthSummaryUtilContract.totalSynthsInKey(
+				walletAddress,
+				bytesFormatter(CRYPTO_CURRENCY_TO_KEY.sUSD)
+			),
+			Synthetix.collateral(walletAddress),
+			provider.getBalance(walletAddress),
+		]);
 
 	const [synthsKeys, synthsBalances] = synthBalanceResults;
 

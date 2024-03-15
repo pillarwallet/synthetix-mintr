@@ -23,7 +23,7 @@ const SetAllowance = ({ createTransaction, goBack, currentGasPrice }) => {
 		try {
 			setError(null);
 
-			const gasEstimate = await sushiContract.estimate.approve(
+			const gasEstimate = await sushiContract.estimateGas.approve(
 				sushiPLRETHContract.address,
 				parseEther(TOKEN_ALLOWANCE_LIMIT.toString())
 			);
