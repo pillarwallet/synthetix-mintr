@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
-const projectId = process.env.REACT_APP_WC_PROJECT_ID;
+const projectId: any = process.env.REACT_APP_WC_PROJECT_ID;
 
 const metadata = {
 	name: 'PLR Rewards Dashboard',
