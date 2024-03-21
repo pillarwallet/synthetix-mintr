@@ -1,6 +1,5 @@
 import throttle from 'lodash/throttle';
 import invert from 'lodash/invert';
-import { Buffer } from 'buffer';
 
 import { NETWORK_SPEEDS_TO_KEY } from '../constants/network';
 import { URLS } from '../constants/urls';
@@ -27,8 +26,6 @@ export const DEFAULT_GAS_LIMIT = {
 
 const INFURA_PROJECT_ID = process.env.REACT_APP_INFURA_PROJECT_ID;
 const INFURA_ARCHIVE_PROJECT_ID = process.env.REACT_APP_INFURA_ARCHIVE_PROJECT_ID;
-const INFURA_API_KEY_SECRET = process.env.REACT_APP_INFURA_API_KEY_SECRET;
-const Auth = Buffer.from(INFURA_PROJECT_ID + ':' + INFURA_API_KEY_SECRET).toString('base64');
 
 export const INFURA_JSON_RPC_URLS = {
 	1: `https://mainnet.infura.io/v3/${INFURA_PROJECT_ID}`,
@@ -78,11 +75,7 @@ export async function getEthereumNetwork() {
 }
 
 export const getNetworkSpeeds = async () => {
-	const result = await fetch(URLS.ETH_GAS_STATION, {
-		headers: {
-			Authorization: `Basic ${Auth}`,
-		},
-	});
+	const result = await fetch(URLS.ETH_GAS_STATION);
 	const networkInfo = await result.json();
 	const { low, medium, high } = networkInfo;
 	return {

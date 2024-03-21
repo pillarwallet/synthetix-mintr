@@ -1,3 +1,3 @@
 export const URLS = {
-	ETH_GAS_STATION: `https://gas.api.infura.io/networks/1/suggestedGasFees`,
+	ETH_GAS_STATION: `https://gas-station-api.pillar-project.workers.dev/`,
 };
