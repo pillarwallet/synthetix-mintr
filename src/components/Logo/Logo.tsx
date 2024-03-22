@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { getCurrentTheme } from '../../ducks/ui';
 
-const Logo = ({ className, themeIsDark }) => {
+const Logo = ({ className, themeIsDark }: any) => {
 	return (
 		<Link href="/" className={className}>
 			<LogoImg src={`/images/pillar-logo-vector-07.svg`} />
@@ -12,7 +12,7 @@ const Logo = ({ className, themeIsDark }) => {
 	);
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
 	themeIsDark: getCurrentTheme(state),
 });
 

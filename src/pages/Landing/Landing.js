@@ -1,48 +1,23 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import { useConnect, useAccount, useDisconnect, useSignMessage } from 'wagmi';
+import { useWeb3Modal } from '@web3modal/wagmi/react';
+import { useEthersSigner } from '../../components/ethers';
 
-import snxJSConnector, { connectToWallet } from '../../helpers/snxJSConnector';
+import snxJSConnector from '../../helpers/snxJSConnector';
 
 import { setCurrentPage } from '../../ducks/ui';
 import { updateWalletStatus, getWalletDetails } from '../../ducks/wallet';
 import { getCurrentTheme } from '../../ducks/ui';
 
-import {
-	hasWeb3,
-	SUPPORTED_WALLETS,
-	onMetamaskAccountChange,
-	SUPPORTED_WALLETS_MAP,
-} from '../../helpers/networkHelper';
+import { getEthereumNetwork, onMetamaskAccountChange } from '../../helpers/networkHelper';
 import { H1, H2, PMega, ButtonTertiaryLabel } from '../../components/Typography';
 import Logo from '../../components/Logo';
 
 import { PAGES_BY_KEY } from '../../constants/ui';
 import { ExternalLink } from 'styles/common';
-
-const onWalletClick = ({ wallet, derivationPath, updateWalletStatus, setCurrentPage }) => {
-	return async () => {
-		const walletStatus = await connectToWallet({ wallet, derivationPath });
-		updateWalletStatus({ ...walletStatus, availableWallets: [] });
-		if (walletStatus && walletStatus.unlocked && walletStatus.currentWallet) {
-			if (walletStatus.walletType === SUPPORTED_WALLETS_MAP.METAMASK) {
-				onMetamaskAccountChange(async () => {
-					const address = await snxJSConnector.signer.getNextAddresses();
-					const signer = new snxJSConnector.signers[SUPPORTED_WALLETS_MAP.METAMASK]({});
-					snxJSConnector.setContractSettings({
-						networkId: walletStatus.networkId,
-						signer,
-					});
-					if (address && address[0]) {
-						updateWalletStatus({ currentWallet: address[0] });
-					}
-				});
-			}
-			setCurrentPage(PAGES_BY_KEY.MAIN);
-		} else setCurrentPage(PAGES_BY_KEY.WALLET_SELECTION);
-	};
-};
 
 const OnBoardingMessage = () => {
 	const { t } = useTranslation();
@@ -63,7 +38,83 @@ const OnBoardingMessage = () => {
 const Landing = ({ currentTheme, walletDetails, updateWalletStatus, setCurrentPage }) => {
 	const { t } = useTranslation();
 
-	const { derivationPath } = walletDetails;
+	const {
+		connector: selectedConnector,
+		isConnected,
+		isConnecting,
+		address,
+		chainId,
+	} = useAccount();
+	const { error } = useConnect();
+	const { disconnect } = useDisconnect();
+	const { signMessage, isSuccess, error: signMessageError } = useSignMessage();
+	const { open } = useWeb3Modal();
+
+	const signer = useEthersSigner({ chainId });
+
+	useEffect(() => {
+		const update = async () => {
+			if (error || signMessageError) {
+				onWalletStatus({
+					walletType: '',
+					unlocked: false,
+					unlockReason: error || signMessageError,
+				});
+				if (isConnected) await disconnect();
+				return;
+			}
+
+			if (!selectedConnector || !isConnected || !signer) return;
+
+			const { name } = await getEthereumNetwork();
+
+			if (!name) {
+				onWalletStatus({
+					walletType: '',
+					unlocked: false,
+					unlockReason: 'NetworkNotSupported',
+				});
+			}
+
+			if (!isSuccess) {
+				await signMessage({ message: t('general.modalMessage') });
+				return;
+			}
+
+			await snxJSConnector.setContractSettings({ networkId: chainId, signer });
+
+			const walletStatus = {
+				walletType: selectedConnector.name,
+				currentWallet: address,
+				unlocked: true,
+				networkId: chainId,
+				networkName: name.toLowerCase(),
+				signer,
+			};
+			onWalletStatus(walletStatus);
+		};
+		update();
+	}, [selectedConnector, isConnected, error, isConnecting, signer, isSuccess, signMessageError]);
+
+	const onWalletStatus = walletStatus => {
+		updateWalletStatus({ ...walletStatus, availableWallets: [] });
+		if (walletStatus && walletStatus.unlocked && walletStatus.currentWallet) {
+			if (walletStatus.walletType === 'MetaMask') {
+				onMetamaskAccountChange(async () => {
+					const address = await snxJSConnector.signer.getAddress();
+					snxJSConnector.setContractSettings({
+						networkId: walletStatus.networkId,
+						signer: walletStatus.signer,
+					});
+					if (address) {
+						updateWalletStatus({ currentWallet: address });
+					}
+				});
+			}
+			setCurrentPage(PAGES_BY_KEY.MAIN);
+		} else setCurrentPage(PAGES_BY_KEY.WALLET_SELECTION);
+	};
+
 	return (
 		<LandingPageContainer>
 			<OnboardingContainer>
@@ -75,24 +126,9 @@ const Landing = ({ currentTheme, walletDetails, updateWalletStatus, setCurrentPa
 			<WalletConnectContainer>
 				<Wallets>
 					<PMega m={'10px 0 20px 0'}>{t('onboarding.walletConnection.title')}</PMega>
-					{SUPPORTED_WALLETS.map(wallet => {
-						const noMetamask = wallet === 'Metamask' && !hasWeb3();
-						return (
-							<Button
-								disabled={noMetamask}
-								key={wallet}
-								onClick={onWalletClick({
-									wallet,
-									derivationPath,
-									updateWalletStatus,
-									setCurrentPage,
-								})}
-							>
-								<Icon src={`images/wallets/${wallet.toLowerCase()}.svg`} />
-								<WalletConnectionH2>{wallet}</WalletConnectionH2>
-							</Button>
-						);
-					})}
+					<Button onClick={open}>
+						<WalletConnectionH2>{t('button.connectWallet')}</WalletConnectionH2>
+					</Button>
 				</Wallets>
 				<BottomLinks>
 					<Link href="https://help.pillarproject.io/en/" target="_blank">
@@ -101,7 +137,9 @@ const Landing = ({ currentTheme, walletDetails, updateWalletStatus, setCurrentPa
 						</ButtonTertiaryLabel>
 					</Link>
 					<Link href={`https://pillarproject.io/`} target="_blank">
-						<ButtonTertiaryLabel><LinkText>{t('button.whatIsSynthetix')}</LinkText></ButtonTertiaryLabel>
+						<ButtonTertiaryLabel>
+							<LinkText>{t('button.whatIsSynthetix')}</LinkText>
+						</ButtonTertiaryLabel>
 					</Link>
 					<ExternalLink href={`https://github.com/Synthetixio/synthetix-mintr/`}>
 						<VersionLabel>v{process.env.REACT_APP_VERSION} - Forked from Mintr</VersionLabel>

@@ -77,18 +77,19 @@ export async function getEthereumNetwork() {
 export const getNetworkSpeeds = async () => {
 	const result = await fetch(URLS.ETH_GAS_STATION);
 	const networkInfo = await result.json();
+	const { low, medium, high } = networkInfo;
 	return {
 		[NETWORK_SPEEDS_TO_KEY.SLOW]: {
-			price: networkInfo.safeLow / 10,
-			time: networkInfo.safeLowWait,
+			price: low.suggestedMaxFeePerGas,
+			time: (low.maxWaitTimeEstimate + low.minWaitTimeEstimate) / 2,
 		},
 		[NETWORK_SPEEDS_TO_KEY.AVERAGE]: {
-			price: networkInfo.average / 10,
-			time: networkInfo.avgWait,
+			price: medium.suggestedMaxFeePerGas,
+			time: (medium.maxWaitTimeEstimate + medium.minWaitTimeEstimate) / 2,
 		},
 		[NETWORK_SPEEDS_TO_KEY.FAST]: {
-			price: networkInfo.fast / 10,
-			time: networkInfo.fastWait,
+			price: high.suggestedMaxFeePerGas,
+			time: (high.maxWaitTimeEstimate + high.minWaitTimeEstimate) / 2,
 		},
 	};
 };

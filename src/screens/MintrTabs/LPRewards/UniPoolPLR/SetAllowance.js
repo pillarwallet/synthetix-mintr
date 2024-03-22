@@ -23,7 +23,7 @@ const SetAllowance = ({ createTransaction, goBack, currentGasPrice }) => {
 		try {
 			setError(null);
 
-			const gasEstimate = await uniswapV2Contract.estimate.approve(
+			const gasEstimate = await uniswapV2Contract.estimateGas.approve(
 				unipoolPLRContract.address,
 				parseEther(TOKEN_ALLOWANCE_LIMIT.toString())
 			);

@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { H1, H2 } from '../../components/Typography';
 import { withTranslation } from 'react-i18next';
 
-const MobileLanding = ({ t }) => {
+const MaintenanceMessage = ({ t }: any) => {
 	return (
 		<Container>
-			<H1>{t('mobileLanding.title')}</H1>
-			<H2>{t('mobileLanding.subtitle')}</H2>
+			<H1>{t('maintenance.title')}</H1>
+			<H2>{t('maintenance.subtitle')}</H2>
 		</Container>
 	);
 };
@@ -18,7 +18,6 @@ const Container = styled.div`
 	align-items: center;
 	flex-direction: column;
 	justify-content: center;
-	padding: 0 20px;
 `;
 
-export default withTranslation()(MobileLanding);
+export default withTranslation()(MaintenanceMessage) as any;

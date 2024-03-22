@@ -18,7 +18,7 @@ const Button = styled.button`
 	flex: 1;
 	font-size: 32px;
 	transition: all ease-in 0.1s;
-	font-family: 'archia-medium';
+	font-family: 'Archia-medium';
 	background-color: ${props => props.theme.colorStyles.background};
 	color: ${props => props.theme.colorStyles.subtext};
 	&:disabled {

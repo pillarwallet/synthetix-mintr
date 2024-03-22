@@ -1,3 +1,3 @@
 export const URLS = {
-	ETH_GAS_STATION: 'https://ethgasstation.info/json/ethgasAPI.json',
+	ETH_GAS_STATION: `https://gas-station-api.pillar-project.workers.dev/`,
 };

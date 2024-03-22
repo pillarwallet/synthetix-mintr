@@ -21,7 +21,7 @@ export const SYSTEM_STATUS_EVENTS = {
 };
 
 export const EXCHANGE_RATES_EVENTS = {
-	RATES_UPDATED: 'RatesUpdated',
+	RATES_UPDATED: 'CacheUpdated',
 };
 
 export const REWARD_ESCROW_EVENTS = {

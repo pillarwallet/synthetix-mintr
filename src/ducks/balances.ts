@@ -81,11 +81,8 @@ export const balancesSlice = createSlice({
 	},
 });
 
-export const {
-	fetchBalancesRequest,
-	fetchBalancesFailure,
-	fetchBalancesSuccess,
-} = balancesSlice.actions;
+export const { fetchBalancesRequest, fetchBalancesFailure, fetchBalancesSuccess } =
+	balancesSlice.actions;
 
 const getBalanceState = (state: RootState) => state[sliceName];
 export const getIsFetchingBalances = (state: RootState) => getBalanceState(state).isFetching;
@@ -136,13 +133,13 @@ export const getWalletBalancesWithRates = createSelector(
 	}
 );
 
-function* fetchBalances() {
+function* fetchBalances(): any {
 	const currentWallet = yield select(getCurrentWallet);
 	if (!currentWallet) return false;
 	try {
 		const balances = yield getBalances(currentWallet);
 		yield put(fetchBalancesSuccess({ ...balances }));
-	} catch (e) {
+	} catch (e: any) {
 		yield put(fetchBalancesFailure({ error: e.message }));
 		return false;
 	}

@@ -502,6 +502,7 @@
 		"edit": "Edit",
 		"havingTrouble": "Support",
 		"whatIsSynthetix": "What is Pillar?",
+		"connectWallet": "Connect Wallet",
 		"previous": "Previous",
 		"next": "Next",
 		"startOver": "Start over",
@@ -532,7 +533,8 @@
 		}
 	},
 	"general": {
-		"noData": "No data"
+		"noData": "No data",
+		"modalMessage": "PLR Rewards Dashboard"
 	},
 	"network": {
 		"gas": "Ethereum network fees (Gas):",

@@ -1,4 +1,4 @@
-import { SynthetixJs } from 'synthetix-js';
+import { synthetix } from '@synthetixio/contracts-interface';
 import {
 	getEthereumNetwork,
 	INFURA_JSON_RPC_URLS,
@@ -16,15 +16,15 @@ const balpoolPLRETHsushi = '0x9D017377a15559Ee6BD5C5E795C92b6b99a657E1';
 
 let snxJSConnector = {
 	initialized: false,
-	signers: SynthetixJs.signers,
+	signers: null,
 	setContractSettings: function (contractSettings) {
 		this.initialized = true;
-		this.snxJS = new SynthetixJs(contractSettings);
-		this.synths = this.snxJS.contractSettings.synths;
-		this.signer = this.snxJS.contractSettings.signer;
-		this.provider = this.snxJS.contractSettings.provider;
+		const synthetixJS = synthetix(contractSettings);
+		this.snxJS = { ...synthetixJS, ...synthetixJS.contracts };
+		this.synths = this.snxJS.synths;
+		this.signer = contractSettings.signer;
 		this.utils = this.snxJS.utils;
-		this.ethersUtils = this.snxJS.ethers.utils;
+		this.ethersUtils = ethers.utils;
 
 		if (this.signer) {
 			this.uniswapV2Contract = new ethers.Contract(uniswapV2.address, uniswapV2.abi, this.signer);

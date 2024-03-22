@@ -65,13 +65,13 @@ export const getTotalEscrowedBalance = createSelector(getEscrowedBalances, escro
 	return stakingRewards + tokenSale;
 });
 
-function* fetchEscrowedBalances() {
+function* fetchEscrowedBalances(): any {
 	const currentWallet = yield select(getCurrentWallet);
 	if (currentWallet != null) {
 		try {
 			const escrowedBalances = yield getEscrowData(currentWallet);
 			yield put(fetchEscrowSuccess({ escrowedBalances }));
-		} catch (e) {
+		} catch (e: any) {
 			yield put(fetchEscrowFailure({ error: e.message }));
 			return false;
 		}

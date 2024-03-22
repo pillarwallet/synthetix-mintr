@@ -55,23 +55,20 @@ export const debtStatusSlice = createSlice({
 	},
 });
 
-export const {
-	fetchDebtStatusRequest,
-	fetchDebtStatusFailure,
-	fetchDebtStatusSuccess,
-} = debtStatusSlice.actions;
+export const { fetchDebtStatusRequest, fetchDebtStatusFailure, fetchDebtStatusSuccess } =
+	debtStatusSlice.actions;
 
 const getDebtState = (state: RootState) => state[sliceName];
 export const getDebtStatusData = (state: RootState) => getDebtState(state).debtStatusData;
 export const getIsFetchingBDebtData = (state: RootState) => getDebtState(state).isFetching;
 
-function* fetchDebtStatus() {
+function* fetchDebtStatus(): any {
 	const currentWallet = yield select(getCurrentWallet);
 	if (currentWallet != null) {
 		try {
 			const debtStatus = yield getDebtStatus(currentWallet);
 			yield put(fetchDebtStatusSuccess({ debtStatus }));
-		} catch (e) {
+		} catch (e: any) {
 			yield put(fetchDebtStatusFailure({ error: e.message }));
 			return false;
 		}
