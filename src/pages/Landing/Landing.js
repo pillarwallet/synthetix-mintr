@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { useConnect, useAccount, useDisconnect, useSignMessage } from 'wagmi';
-import { useWeb3Modal } from '@web3modal/wagmi/react';
 import { useEthersSigner } from '../../components/ethers';
 
 import snxJSConnector from '../../helpers/snxJSConnector';
@@ -12,7 +11,7 @@ import { setCurrentPage } from '../../ducks/ui';
 import { updateWalletStatus, getWalletDetails } from '../../ducks/wallet';
 import { getCurrentTheme } from '../../ducks/ui';
 
-import { getEthereumNetwork, onMetamaskAccountChange } from '../../helpers/networkHelper';
+import { hasWeb3, getEthereumNetwork, onMetamaskAccountChange } from '../../helpers/networkHelper';
 import { H1, H2, PMega, ButtonTertiaryLabel } from '../../components/Typography';
 import Logo from '../../components/Logo';
 
@@ -45,10 +44,9 @@ const Landing = ({ currentTheme, walletDetails, updateWalletStatus, setCurrentPa
 		address,
 		chainId,
 	} = useAccount();
-	const { error } = useConnect();
+	const { error, connect, connectors } = useConnect();
 	const { disconnect } = useDisconnect();
 	const { signMessage, isSuccess, error: signMessageError } = useSignMessage();
-	const { open } = useWeb3Modal();
 
 	const signer = useEthersSigner({ chainId });
 
@@ -126,9 +124,21 @@ const Landing = ({ currentTheme, walletDetails, updateWalletStatus, setCurrentPa
 			<WalletConnectContainer>
 				<Wallets>
 					<PMega m={'10px 0 20px 0'}>{t('onboarding.walletConnection.title')}</PMega>
-					<Button onClick={open}>
-						<WalletConnectionH2>{t('button.connectWallet')}</WalletConnectionH2>
-					</Button>
+					{connectors.map(wallet => {
+						const noMetamask = wallet.name === 'Metamask' && !hasWeb3();
+						return (
+							<Button
+								disabled={noMetamask}
+								key={wallet.id}
+								onClick={() => {
+									connect({ connector: wallet });
+								}}
+							>
+								<Icon src={`images/wallets/${wallet.id.toLowerCase()}.svg`} />
+								<WalletConnectionH2>{wallet.name}</WalletConnectionH2>
+							</Button>
+						);
+					})}
 				</Wallets>
 				<BottomLinks>
 					<Link href="https://help.pillarproject.io/en/" target="_blank">

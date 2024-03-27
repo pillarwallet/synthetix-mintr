@@ -81,15 +81,15 @@ export const getNetworkSpeeds = async () => {
 	return {
 		[NETWORK_SPEEDS_TO_KEY.SLOW]: {
 			price: low.suggestedMaxFeePerGas,
-			time: (low.maxWaitTimeEstimate + low.minWaitTimeEstimate) / 2,
+			time: (low.maxWaitTimeEstimate + low.minWaitTimeEstimate) / (2 * 60), // Convert seconds to minute
 		},
 		[NETWORK_SPEEDS_TO_KEY.AVERAGE]: {
 			price: medium.suggestedMaxFeePerGas,
-			time: (medium.maxWaitTimeEstimate + medium.minWaitTimeEstimate) / 2,
+			time: (medium.maxWaitTimeEstimate + medium.minWaitTimeEstimate) / (2 * 60),
 		},
 		[NETWORK_SPEEDS_TO_KEY.FAST]: {
 			price: high.suggestedMaxFeePerGas,
-			time: (high.maxWaitTimeEstimate + high.minWaitTimeEstimate) / 2,
+			time: (high.maxWaitTimeEstimate + high.minWaitTimeEstimate) / (2 * 60),
 		},
 	};
 };

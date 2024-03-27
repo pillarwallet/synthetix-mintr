@@ -8,6 +8,8 @@ import Root from './pages/Root';
 import './i18n';
 import Web3Providers from './Providers';
 
+global.Buffer = global.Buffer || require('buffer').Buffer;
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<Suspense fallback={<div />}>
