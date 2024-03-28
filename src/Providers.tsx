@@ -1,13 +1,18 @@
-import { createWeb3Modal } from '@web3modal/wagmi/react';
-import { defaultWagmiConfig } from '@web3modal/wagmi/react/config';
-
-import { WagmiProvider } from 'wagmi';
 import { mainnet } from 'wagmi/chains';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import { configureChains, createConfig, WagmiConfig } from 'wagmi';
+import { infuraProvider } from 'wagmi/providers/infura';
+import { publicProvider } from 'wagmi/providers/public';
+import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
+import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
+import { LedgerConnector } from 'wagmi/connectors/ledger';
 
 const queryClient = new QueryClient();
 
 const projectId: any = process.env.REACT_APP_WC_PROJECT_ID;
+const REACT_APP_INFURA_PROJECT_ID = process.env.REACT_APP_INFURA_PROJECT_ID;
 
 const metadata = {
 	name: 'PLR Rewards Dashboard',
@@ -17,32 +22,51 @@ const metadata = {
 	icons: ['https://www.pillar.fi/wp-content/themes/pillar-2023/assets/images/pillar-logo.svg'],
 };
 
-const chains = [mainnet] as const;
-const config = defaultWagmiConfig({
-	chains,
-	projectId,
-	metadata,
-	enableWalletConnect: true,
-	enableInjected: true,
-});
+const { chains, publicClient, webSocketPublicClient } = configureChains(
+	[mainnet],
+	[infuraProvider({ apiKey: REACT_APP_INFURA_PROJECT_ID ?? '' }), publicProvider()]
+);
 
-createWeb3Modal({
-	wagmiConfig: config,
-	projectId,
-	enableOnramp: true,
-	includeWalletIds: [
-		'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
-		'19177a98252e07ddfc9af2083ba8e07ef627cb6103467ffebb3f8f4205fd7927',
-		'fd20dc426fb37566d803205b19bbc1d4096b248ac04548e3cfb6b3a38bd033aa',
-		'e7c4d26541a7fd84dbdfa9922d3ad21e936e13a7a0e44385d44f006139e44d3b',
+const client = createConfig({
+	autoConnect: true,
+	connectors: [
+		new MetaMaskConnector({
+			chains,
+			options: {
+				UNSTABLE_shimOnConnectSelectAccount: true,
+			},
+		}),
+		new LedgerConnector({
+			chains,
+			options: {
+				chainId: 1,
+			},
+		}),
+		new CoinbaseWalletConnector({
+			chains,
+			options: {
+				appName: 'PLR Rewards Dashboard',
+			},
+		}),
+		new WalletConnectConnector({
+			chains,
+			options: {
+				metadata,
+				isNewChainsStale: false,
+				projectId,
+				showQrModal: true,
+			},
+		}),
 	],
+	publicClient,
+	webSocketPublicClient,
 });
 
 function Web3Providers({ children }: any) {
 	return (
-		<WagmiProvider config={config}>
+		<WagmiConfig config={client}>
 			<QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-		</WagmiProvider>
+		</WagmiConfig>
 	);
 }
 

@@ -1,7 +1,7 @@
 import { providers } from 'ethers';
 import { useEffect, useState } from 'react';
 import type { Account, Chain, Client, Transport } from 'viem';
-import { Config, useConnectorClient } from 'wagmi';
+import { useWalletClient } from 'wagmi';
 
 export async function clientToSigner(client: Client<Transport, Chain, Account>) {
 	const { account, chain, transport } = client;
@@ -16,7 +16,7 @@ export async function clientToSigner(client: Client<Transport, Chain, Account>) 
 }
 
 export function useEthersSigner({ chainId }: { chainId?: number } = {}) {
-	const { data: client } = useConnectorClient<Config>({ chainId });
+	const { data: client } = useWalletClient({ chainId });
 	const [signer, setSigner] = useState<any>(null);
 
 	useEffect(() => {

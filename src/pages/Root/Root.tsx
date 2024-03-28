@@ -1,6 +1,5 @@
 import React, { useEffect, FC } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { useAccount } from 'wagmi';
 
 import { setAppReady, getAppIsReady, fetchAppStatusRequest } from 'ducks/app';
 import { fetchDebtStatusRequest } from 'ducks/debtStatus';
@@ -74,8 +73,7 @@ const Root: FC<PropsFromRedux> = ({
 		}
 	}, INTERVAL_TIMER);
 
-	const { chainId } = useAccount();
-	const signer = useEthersSigner({ chainId });
+	const signer = useEthersSigner({ chainId: 1 });
 
 	useEffect(() => {
 		const init = async () => {
